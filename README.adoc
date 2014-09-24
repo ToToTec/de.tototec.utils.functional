@@ -3,18 +3,19 @@
 This project consists of some useful helper classes and interfaces, which help to write more functional Java code.
 
 The classes are:
-* `FList` - contains static methods returning mostly `java.util.List`s and accepting `Ìterable`s and arrays, like `map`, `flatMap`, `filter`, ...
-* `F0`, `F1`, `F2`, ... - Interfaces representing a function with n args where n is already in the name
-* `Procedure0`, `Procedure1`, `Procedure2` - Interfaces representing a procedure with n args where n is given by the name
-* `Optional` - An immutable class representing an optional value
-* `Either` - An immutable class representing either one of two values
-* `Tuple1`, `Tuple2` - Classes representing tuples with n args where n is given by the name
+
+* link:src/main/java/de/tototec/utils/functional/FList.java[`FList`] - contains static methods returning mostly `java.util.List` s and accepting `Iterable`s and arrays, like `map`, `flatMap`, `filter`, ...
+* link:src/main/java/de/tototec/utils/functional/F0.java[`F0`], link:src/main/java/de/tototec/utils/functional/F1.java[`F1`], link:src/main/java/de/tototec/utils/functional/F2.java[`F2`], ... - Interfaces representing a function with n args where n is already in the name
+* link:src/main/java/de/tototec/utils/functional/Procedure0.java[`Procedure0`], link:src/main/java/de/tototec/utils/functional/Procedure1.java[`Procedure1`], link:src/main/java/de/tototec/utils/functional/Procedure2.java[`Procedure2`] - Interfaces representing a procedure with n args where n is given by the name
+* link:src/main/java/de/tototec/utils/functional/Optional.java[`Optional`] - An immutable class representing an optional value
+* link:src/main/java/de/tototec/utils/functional/Either.java[`Either`] - An immutable class representing either one of two values
+* link:src/main/java/de/tototec/utils/functional/Tuple2.java[`Tuple2`], link:src/main/java/de/tototec/utils/functional/Tuple3.java[`Tuple3`], ... - Classes representing tuples with n args where n is given by the name
 
 All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but maybe less errorprone.
 
 // TODO: Examples
 
-== Ùse with Java 8 Lambdas
+== Use with Java 8 Lambdas
 
 Writing functional code can be much more pleasant if Java 8 Lambda expressions can be used. The function and procedure interfaces all fulfil the requirements for functional interfaces and can be thus implicitly inferred when lambda expressions are used.
 
