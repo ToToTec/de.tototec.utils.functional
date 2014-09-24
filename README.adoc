@@ -1,4 +1,10 @@
 = Functional Utils
+:toc:
+:toc-placement: preamble
+
+This project consists of some useful helper classes and interfaces, which help to write more functional Java code.
+
+== Introduction
 
 This project consists of some useful helper classes and interfaces, which help to write more functional Java code.
 
@@ -15,15 +21,34 @@ All those classes and interfaces can be used with Java 5 and above. Although by 
 
 // TODO: Examples
 
+(Example will come later)
+
 == Use with Java 8 Lambdas
 
 Writing functional code can be much more pleasant if Java 8 Lambda expressions can be used. The function and procedure interfaces all fulfil the requirements for functional interfaces and can be thus implicitly inferred when lambda expressions are used.
 
-== Use on Java 8 Lambdas for earlier Java Runtimes
+== Use of Java 8 Lambdas for earlier Java Runtimes
 
-Using the Java 8 lamdba expressions can grealty improve the functional experience. If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the retrolambda tool. As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
+Using the Java 8 lamdba expressions can grealty improve the functional experience. If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the https://github.com/orfjackal/retrolambda[retrolambda tool]. As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
 
-// TODO: Example with Maven
+To use Retrolambda in your Maven project, you need to add something like this (please refer also to the Retrolambda website for more up to date information):
+[source,xml]
+----
+<plugin>
+    <groupId>net.orfjackal.retrolambda</groupId>
+    <artifactId>retrolambda-maven-plugin</artifactId>
+    <version>1.6.1</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>process-main</goal>
+                <goal>process-test</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+----
+
 
 == Recomendation for Editing files with Eclipse
 
