@@ -1,0 +1,29 @@
+= Functional Utils
+
+This project consists of some useful helper classes and interfaces, which help to write more functional Java code.
+
+The classes are:
+* `FList` - contains static methods returning mostly `java.util.List`s and accepting `Ìterable`s and arrays, like `map`, `flatMap`, `filter`, ...
+* `F0`, `F1`, `F2`, ... - Interfaces representing a function with n args where n is already in the name
+* `Procedure0`, `Procedure1`, `Procedure2` - Interfaces representing a procedure with n args where n is given by the name
+* `Optional` - An immutable class representing an optional value
+* `Either` - An immutable class representing either one of two values
+* `Tuple1`, `Tuple2` - Classes representing tuples with n args where n is given by the name
+
+All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but maybe less errorprone.
+
+// TODO: Examples
+
+== Ùse with Java 8 Lambdas
+
+Writing functional code can be much more pleasant if Java 8 Lambda expressions can be used. The function and procedure interfaces all fulfil the requirements for functional interfaces and can be thus implicitly inferred when lambda expressions are used.
+
+== Use on Java 8 Lambdas for earlier Java Runtimes
+
+Using the Java 8 lamdba expressions can grealty improve the functional experience. If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the retrolambda tool. As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
+
+// TODO: Example with Maven
+
+== Recomendation for Editing files with Eclipse
+
+// TODO: include list
