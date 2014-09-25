@@ -159,7 +159,7 @@ public abstract class FList {
 	}
 
 	public static <R, T> R foldRight(final Iterable<T> source, final F2<? super T, R, R> fold, final R right) {
-		final List<T> list = source instanceof List<?> ? (List<T>) source : map(source, new IdentityFunction<T>());
+		final List<T> list = source instanceof List<?> ? (List<T>) source : map(source, new F1.Identity<T>());
 		R theRight = right;
 		for (int i = list.size() - 1; i >= 0; --i) {
 			theRight = fold.apply(list.get(i), theRight);
