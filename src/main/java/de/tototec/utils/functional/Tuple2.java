@@ -6,10 +6,14 @@ public class Tuple2<A, B> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static <A, B> Tuple2<A, B> of(final A a, final B b) {
+		return new Tuple2<A, B>(a, b);
+	}
+
 	private final A a;
 	private final B b;
 
-	public Tuple2(final A a, final B b) {
+	private Tuple2(final A a, final B b) {
 		this.a = a;
 		this.b = b;
 	}

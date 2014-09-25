@@ -6,11 +6,23 @@ public class Tuple3<A, B, C> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static <A, B, C> Tuple3<A, B, C> of(final A a, final B b, final C c) {
+		return new Tuple3<A, B, C>(a, b, c);
+	}
+
+	public static <A, B, C> Tuple3<A, B, C> of(final Tuple2<A, B> ab, final C c) {
+		return new Tuple3<A, B, C>(ab.a(), ab.b(), c);
+	}
+
+	public static <A, B, C> Tuple3<A, B, C> of(final A a, final Tuple2<B, C> bc) {
+		return new Tuple3<A, B, C>(a, bc.a(), bc.b());
+	}
+
 	private final A a;
 	private final B b;
 	private final C c;
 
-	public Tuple3(final A a, final B b, final C c) {
+	private Tuple3(final A a, final B b, final C c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;

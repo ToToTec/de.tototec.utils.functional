@@ -268,7 +268,7 @@ public abstract class FList {
 				right.add(t);
 			}
 		}
-		return new Tuple2<List<T>, List<T>>(left, right);
+		return Tuple2.of(left, right);
 	}
 
 	public static <T> Tuple2<List<T>, List<T>> partition(final T[] source, final F1<? super T, Boolean> predicate) {

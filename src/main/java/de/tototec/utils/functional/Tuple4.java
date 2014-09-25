@@ -6,12 +6,24 @@ public class Tuple4<A, B, C, D> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static <A, B, C, D> Tuple4<A, B, C, D> of(final A a, final B b, final C c, final D d) {
+		return new Tuple4<A, B, C, D>(a, b, c, d);
+	}
+
+	public static <A, B, C, D> Tuple4<A, B, C, D> of(final Tuple3<A, B, C> abc, final D d) {
+		return new Tuple4<A, B, C, D>(abc.a(), abc.b(), abc.c(), d);
+	}
+
+	public static <A, B, C, D> Tuple4<A, B, C, D> of(final A a, final Tuple3<B, C, D> bcd) {
+		return new Tuple4<A, B, C, D>(a, bcd.a(), bcd.b(), bcd.c());
+	}
+
 	private final A a;
 	private final B b;
 	private final C c;
 	private final D d;
 
-	public Tuple4(final A a, final B b, final C c, D d) {
+	private Tuple4(final A a, final B b, final C c, D d) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
