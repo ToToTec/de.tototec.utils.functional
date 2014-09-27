@@ -29,9 +29,12 @@ Writing functional code can be much more pleasant if Java 8 Lambda expressions c
 
 == Use of Java 8 Lambdas for earlier Java Runtimes
 
-Using the Java 8 lamdba expressions can grealty improve the functional experience. If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the https://github.com/orfjackal/retrolambda[retrolambda tool]. As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
+Using the Java 8 lamdba expressions can grealty improve the functional experience.
+If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the https://github.com/orfjackal/retrolambda[retrolambda tool].
+As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
 
 To use Retrolambda in your Maven project, you need to add something like this (please refer also to the Retrolambda website for more up to date information):
+
 [source,xml]
 ----
 <plugin>
@@ -49,6 +52,33 @@ To use Retrolambda in your Maven project, you need to add something like this (p
 </plugin>
 ----
 
+Addionally, you should take extra measure to ensure no Java8 API slips through.
+This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plugin/[animal-sniffer Maven plugin]:
+
+[source,xml]
+----
+<plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>animal-sniffer-maven-plugin</artifactId>
+	<version>1.11</version>
+	<executions>
+		<execution>
+			<id>signature-check</id>
+			<phase>test</phase>
+			<goals>
+				<goal>check</goal>
+			</goals>
+		</execution>
+	</executions>
+	<configuration>
+		<signature>
+			<groupId>org.codehaus.mojo.signature</groupId>
+			<artifactId>java17</artifactId>
+			<version>1.0</version>
+		</signature>
+	</configuration>
+</plugin>
+----
 
 == Recomendation for Editing files with Eclipse
 
