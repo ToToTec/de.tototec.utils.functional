@@ -71,6 +71,14 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		}
 	}
 
+	public <R> Either<T, R> toLeft(final F0<R> right) {
+		if (isDefined()) {
+			return Either.left(get());
+		} else {
+			return Either.right(right.apply());
+		}
+	}
+
 	public boolean isDefined() {
 		return !isNone;
 	}
