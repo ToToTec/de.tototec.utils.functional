@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class FList {
 
@@ -198,6 +201,26 @@ public abstract class FList {
 		foreach(Arrays.asList(source), foreach);
 	}
 
+	public static <K, T> Map<K, List<T>> groupBy(final T[] source, final F1<? super T, ? extends K> groupBy) {
+		return groupBy(Arrays.asList(source), groupBy);
+	}
+
+	public static <K, T> Map<K, List<T>> groupBy(final Iterable<T> source, final F1<? super T, ? extends K> groupBy) {
+		final Map<K, List<T>> result = new LinkedHashMap<K, List<T>>();
+		for (final T t : source) {
+			final K key = groupBy.apply(t);
+			final List<T> list;
+			if (result.containsKey(key)) {
+				list = result.get(key);
+			} else {
+				list = new LinkedList<T>();
+				result.put(key, list);
+			}
+			list.add(t);
+		}
+		return result;
+	}
+
 	public static <R, T> List<R> map(final Iterable<T> source, final F1<? super T, ? extends R> convert) {
 		final List<R> result = (source instanceof Collection<?>) ? new ArrayList<R>(((Collection<?>) source).size())
 				: new LinkedList<R>();
@@ -337,6 +360,20 @@ public abstract class FList {
 
 	public static <T> List<T> takeWhile(final T[] source, final F1<? super T, Boolean> accept) {
 		return takeWhile(Arrays.asList(source), accept);
+	}
+
+	public static <A, B> List<Tuple2<A, B>> zip(final A[] as, final B[] bs) {
+		return zip(Arrays.asList(as), Arrays.asList(bs));
+	}
+
+	public static <A, B> List<Tuple2<A, B>> zip(final Iterable<A> as, final Iterable<B> bs) {
+		final List<Tuple2<A, B>> result = new LinkedList<Tuple2<A, B>>();
+		final Iterator<A> aIt = as.iterator();
+		final Iterator<B> bIt = bs.iterator();
+		while (aIt.hasNext() && bIt.hasNext()) {
+			result.add(Tuple2.of(aIt.next(), bIt.next()));
+		}
+		return result;
 	}
 
 	private FList() {
