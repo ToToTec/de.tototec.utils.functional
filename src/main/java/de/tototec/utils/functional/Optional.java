@@ -106,7 +106,7 @@ public class Optional<T> implements Iterable<T>, Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <R> Optional<R> flatMap(final F1<? super T, Optional<? extends R>> f) {
+	public <R> Optional<R> flatMap(final F1<? super T, ? extends Optional<R>> f) {
 		return (Optional<R>) (isEmpty() ? Optional.none() : f.apply(get()));
 	}
 
