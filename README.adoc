@@ -2,6 +2,11 @@
 :toc:
 :toc-placement: preamble
 
+image:https://travis-ci.org/ToToTec/de.tototec.utils.functional.svg?branch=master["Build Status", link="https://travis-ci.org/ToToTec/de.tototec.utils.functional"]
+image:https://www.codacy.com/project/badge/d6a2164c269d4a0a8245c12de43c5736["Codacy Badge", link="https://www.codacy.com/p/3188/dashboard"]
+
+[![Codacy Badge]()]()
+
 This project consists of some useful helper classes and interfaces, which help to write more functional Java code.
 
 == Introduction
