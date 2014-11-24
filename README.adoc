@@ -26,6 +26,28 @@ All those classes and interfaces can be used with Java 5 and above. Although by 
 
 (Example will come later)
 
+== Download
+
+Functional Utils is available from http://search.maven.org/#search|gav|1|g%3A%22de.tototec%22%20AND%20a%3A%22de.tototec.utils.functional%22[Maven central repository].
+
+Maven users can use the following dependency declaration:
+
+[source,xml]
+----
+<dependency>
+  <groupId>de.tototec</groupId>
+  <artifactId>de.tototec.utils.functional</artifactId>
+  <version>0.5.0</version>
+</dependency>
+
+http://sbuild.org[SBuild] users can use the following dependency:
+
+[source,scala]
+----
+"mvn:de.tototec:de.tototec.utils.functional:0.5.0"
+----
+
+
 == Use with Java 8 Lambdas
 
 Writing functional code can be much more pleasant if Java 8 Lambda expressions can be used. The function and procedure interfaces all fulfil the requirements for functional interfaces and can be thus implicitly inferred when lambda expressions are used.
@@ -82,6 +104,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 	</configuration>
 </plugin>
 ----
+
 
 == Recomendation for Editing files with Eclipse
 
