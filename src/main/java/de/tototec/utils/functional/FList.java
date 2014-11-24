@@ -362,6 +362,18 @@ public abstract class FList {
 		return takeWhile(Arrays.asList(source), accept);
 	}
 
+	public static <A, B> Map<A, B> toHashMap(final Iterable<Tuple2<A, B>> source) {
+		final LinkedHashMap<A, B> result = new LinkedHashMap<A, B>();
+		for (final Tuple2<A, B> tuple2 : source) {
+			result.put(tuple2.a(), tuple2.b());
+		}
+		return result;
+	}
+
+	public static <A, B> Map<A, B> toHashMap(final Tuple2<A, B>[] source) {
+		return toHashMap(Arrays.asList(source));
+	}
+
 	public static <A, B> List<Tuple2<A, B>> zip(final A[] as, final B[] bs) {
 		return zip(Arrays.asList(as), Arrays.asList(bs));
 	}
