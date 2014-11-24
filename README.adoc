@@ -39,6 +39,7 @@ Maven users can use the following dependency declaration:
   <artifactId>de.tototec.utils.functional</artifactId>
   <version>0.5.0</version>
 </dependency>
+----
 
 http://sbuild.org[SBuild] users can use the following dependency:
 
