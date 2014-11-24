@@ -10,7 +10,7 @@
 	<packaging>bundle</packaging>
 
 	<name>Functional Utils</name>
-	<desscription>Functional Utility Classes for working with Java 5+</description>
+	<description>Functional Utility Classes for working with Java 5+</description>
 	<url>https://github.com/ToToTec/de.tototec.utils.functional</url>
 	<licenses>
 		<license>
