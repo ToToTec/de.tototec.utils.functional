@@ -101,7 +101,7 @@ public abstract class FList {
 		return find(Arrays.asList(source), accept);
 	}
 
-	public static <R, T> List<R> flatMap(final Iterable<T> source, final F1<? super T, ? extends Iterable<R>> convert) {
+	public static <T, R> List<R> flatMap(final Iterable<T> source, final F1<? super T, ? extends Iterable<R>> convert) {
 		final List<R> result = (source instanceof Collection<?>) ? new ArrayList<R>(((Collection<?>) source).size())
 				: new LinkedList<R>();
 		for (final T t : source) {
@@ -117,7 +117,7 @@ public abstract class FList {
 		return result;
 	}
 
-	public static <R, T> List<R> flatMap(final T[] source, final F1<? super T, ? extends Iterable<R>> convert) {
+	public static <T, R> List<R> flatMap(final T[] source, final F1<? super T, ? extends Iterable<R>> convert) {
 		return flatMap(Arrays.asList(source), convert);
 	}
 
@@ -149,7 +149,7 @@ public abstract class FList {
 		return result;
 	}
 
-	public static <R, T> R foldLeft(final Iterable<T> source, final R left, final F2<R, ? super T, R> fold) {
+	public static <T, R> R foldLeft(final Iterable<T> source, final R left, final F2<R, ? super T, R> fold) {
 		R theLeft = left;
 		for (final T t : source) {
 			theLeft = fold.apply(theLeft, t);
@@ -157,11 +157,11 @@ public abstract class FList {
 		return theLeft;
 	}
 
-	public static <R, T> R foldLeft(final T[] source, final R left, final F2<R, ? super T, R> fold) {
+	public static <T, R> R foldLeft(final T[] source, final R left, final F2<R, ? super T, R> fold) {
 		return foldLeft(Arrays.asList(source), left, fold);
 	}
 
-	public static <R, T> R foldRight(final Iterable<T> source, final F2<? super T, R, R> fold, final R right) {
+	public static <T, R> R foldRight(final Iterable<T> source, final F2<? super T, R, R> fold, final R right) {
 		final List<T> list = source instanceof List<?> ? (List<T>) source : map(source, new F1.Identity<T>());
 		R theRight = right;
 		for (int i = list.size() - 1; i >= 0; --i) {
@@ -170,7 +170,7 @@ public abstract class FList {
 		return theRight;
 	}
 
-	public static <R, T> R foldRight(final T[] source, final F2<? super T, R, R> fold, final R right) {
+	public static <T, R> R foldRight(final T[] source, final F2<? super T, R, R> fold, final R right) {
 		R theRight = right;
 		for (int i = source.length - 1; i >= 0; --i) {
 			theRight = fold.apply(source[i], theRight);
@@ -201,11 +201,11 @@ public abstract class FList {
 		foreach(Arrays.asList(source), foreach);
 	}
 
-	public static <K, T> Map<K, List<T>> groupBy(final T[] source, final F1<? super T, ? extends K> groupBy) {
+	public static <T, K> Map<K, List<T>> groupBy(final T[] source, final F1<? super T, ? extends K> groupBy) {
 		return groupBy(Arrays.asList(source), groupBy);
 	}
 
-	public static <K, T> Map<K, List<T>> groupBy(final Iterable<T> source, final F1<? super T, ? extends K> groupBy) {
+	public static <T, K> Map<K, List<T>> groupBy(final Iterable<T> source, final F1<? super T, ? extends K> groupBy) {
 		final Map<K, List<T>> result = new LinkedHashMap<K, List<T>>();
 		for (final T t : source) {
 			final K key = groupBy.apply(t);
@@ -221,7 +221,7 @@ public abstract class FList {
 		return result;
 	}
 
-	public static <R, T> List<R> map(final Iterable<T> source, final F1<? super T, ? extends R> convert) {
+	public static <T, R> List<R> map(final Iterable<T> source, final F1<? super T, ? extends R> convert) {
 		final List<R> result = (source instanceof Collection<?>) ? new ArrayList<R>(((Collection<?>) source).size())
 				: new LinkedList<R>();
 		for (final T t : source) {
@@ -230,7 +230,7 @@ public abstract class FList {
 		return result;
 	}
 
-	public static <R, T> List<R> map(final T[] source, final F1<? super T, ? extends R> convert) {
+	public static <T, R> List<R> map(final T[] source, final F1<? super T, ? extends R> convert) {
 		return map(Arrays.asList(source), convert);
 	}
 
@@ -282,9 +282,9 @@ public abstract class FList {
 
 	public static <T> Tuple2<List<T>, List<T>> partition(final Iterable<T> source,
 			final F1<? super T, Boolean> predicate) {
-		List<T> left = new LinkedList<T>();
-		List<T> right = new LinkedList<T>();
-		for (T t : source) {
+		final List<T> left = new LinkedList<T>();
+		final List<T> right = new LinkedList<T>();
+		for (final T t : source) {
 			if (predicate.apply(t)) {
 				left.add(t);
 			} else {
@@ -362,15 +362,15 @@ public abstract class FList {
 		return takeWhile(Arrays.asList(source), accept);
 	}
 
-	public static <A, B> Map<A, B> toHashMap(final Iterable<Tuple2<A, B>> source) {
-		final LinkedHashMap<A, B> result = new LinkedHashMap<A, B>();
-		for (final Tuple2<A, B> tuple2 : source) {
+	public static <K, V> LinkedHashMap<K, V> toHashMap(final Iterable<Tuple2<K, V>> source) {
+		final LinkedHashMap<K, V> result = new LinkedHashMap<K, V>();
+		for (final Tuple2<K, V> tuple2 : source) {
 			result.put(tuple2.a(), tuple2.b());
 		}
 		return result;
 	}
 
-	public static <A, B> Map<A, B> toHashMap(final Tuple2<A, B>[] source) {
+	public static <K, V> LinkedHashMap<K, V> toHashMap(final Tuple2<K, V>[] source) {
 		return toHashMap(Arrays.asList(source));
 	}
 

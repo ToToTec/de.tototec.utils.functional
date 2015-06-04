@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Optional<T> implements Iterable<T>, Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static <S> Optional<S> some(final S some) {
 		return new Optional<S>(some);
 	}
@@ -20,7 +22,10 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		}
 	}
 
-	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unchecked")
+	public static <N> Optional<N> none() {
+		return (Optional<N>) NONE;
+	}
 
 	@SuppressWarnings("rawtypes")
 	private static final Optional<?> NONE = new Optional();
@@ -36,11 +41,6 @@ public class Optional<T> implements Iterable<T>, Serializable {
 	private Optional(final T optional) {
 		this.isNone = false;
 		this.optional = optional;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <N> Optional<N> none() {
-		return (Optional<N>) NONE;
 	}
 
 	public T get() {
@@ -108,6 +108,12 @@ public class Optional<T> implements Iterable<T>, Serializable {
 	@SuppressWarnings("unchecked")
 	public <R> Optional<R> flatMap(final F1<? super T, ? extends Optional<R>> f) {
 		return (Optional<R>) (isEmpty() ? Optional.none() : f.apply(get()));
+	}
+
+	public void foreach(final Procedure1<? super T> f) {
+		if (isDefined()) {
+			f.apply(get());
+		}
 	}
 
 	@Override
