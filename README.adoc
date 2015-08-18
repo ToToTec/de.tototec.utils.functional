@@ -22,6 +22,43 @@ The classes are:
 
 All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but hopefully less errorprone.
 
+== Examples
+
+[source,java]
+----
+import java.util.*;
+import de.tototec.utils.functional.*;
+import static de.tototec.utils.functional.FList.*;
+
+List<String> names = Arrays.asList("Alice", "Bob", "Carlie", "Dylan");
+// --> [Alice, Bob, Carlie, Dylan]
+
+// Filtering
+List<String> namesWithE = filter(names, new F1<String, Boolean>() {
+  public Boolean apply(String name) {
+    return name.contains("e");
+  }
+});
+// --> [Alice, Carlie]
+
+// Java 8
+List<String> namesWithE_ = filter(names, name -> name.contains("e"));
+
+// Apply a function to all elements
+List<String> namesUppercase = map(names, new F1<String, String>() {
+  public String apply(String name) {
+    return name.toUppercase();
+  }
+});
+// --> [ALICE, BOB, CARLIE, DYLAN]
+
+// Java 8
+List<String> namesUppercase_ = map(names, name -> name.toUppercase());
+// --> [ALICE, BOB, CARLIE, DYLAN]
+
+
+----
+
 // TODO: Examples
 
 (Example will come later)
