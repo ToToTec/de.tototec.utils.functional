@@ -106,7 +106,3 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 </plugin>
 ----
 
-
-== Recomendation for Editing files with Eclipse
-
-// TODO: include list
