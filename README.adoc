@@ -20,7 +20,7 @@ The classes are:
 * link:src/main/java/de/tototec/utils/functional/Either.java[`Either`] - An immutable class representing either one of two values
 * link:src/main/java/de/tototec/utils/functional/Tuple2.java[`Tuple2`], link:src/main/java/de/tototec/utils/functional/Tuple3.java[`Tuple3`], ... - Classes representing tuples with n args where n is given by the name
 
-All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but maybe less errorprone.
+All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but hopefully less errorprone.
 
 // TODO: Examples
 
