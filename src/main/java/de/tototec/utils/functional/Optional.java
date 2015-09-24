@@ -59,6 +59,14 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		}
 	}
 
+	public T getOrElse(final T t) {
+		if (isDefined()) {
+			return optional;
+		} else {
+			return t;
+		}
+	}
+
 	public T orNull() {
 		return isDefined() ? optional : null;
 	}
