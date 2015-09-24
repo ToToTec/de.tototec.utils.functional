@@ -1,36 +1,37 @@
 package de.tototec.utils.functional;
 
+import static de.tototec.utils.functional.FList.foldLeft;
+import static de.tototec.utils.functional.FList.mkString;
+import static org.testng.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static de.tototec.utils.functional.FList.*;
-
-public class FListTest extends Assert {
+public class FListTest {
 
 	@DataProvider
 	public Iterator<Object[]> dataFoldLeft() {
 		@SuppressWarnings("serial")
 		class Data extends LinkedList<Object[]> {
-			<T> void data(T expected, T left, F2<T, T, T> function, T... list) {
+			<T> void data(final T expected, final T left, final F2<T, T, T> function, final T... list) {
 				add(new Object[] { expected, left, function, list });
 			}
 		}
 		;
 
-		Data data = new Data();
+		final Data data = new Data();
 
-		F2<Integer, Integer, Integer> add = new F2<Integer, Integer, Integer>() {
-			public Integer apply(Integer p1, Integer p2) {
+		final F2<Integer, Integer, Integer> add = new F2<Integer, Integer, Integer>() {
+			public Integer apply(final Integer p1, final Integer p2) {
 				return p1 + p2;
 			}
 		};
-		F2<Integer, Integer, Integer> multiply = new F2<Integer, Integer, Integer>() {
-			public Integer apply(Integer p1, Integer p2) {
+		final F2<Integer, Integer, Integer> multiply = new F2<Integer, Integer, Integer>() {
+			public Integer apply(final Integer p1, final Integer p2) {
 				return p1 * p2;
 			}
 		};
@@ -42,7 +43,7 @@ public class FListTest extends Assert {
 	}
 
 	@Test(dataProvider = "dataFoldLeft")
-	public <T> void testFoldLeft(T expected, T left, F2<T, T, T> function, T[] list) {
+	public <T> void testFoldLeft(final T expected, final T left, final F2<T, T, T> function, final T[] list) {
 		assertEquals(foldLeft(list, left, function), expected);
 		assertEquals(foldLeft(Arrays.asList(list), left, function), expected);
 	}
@@ -51,18 +52,20 @@ public class FListTest extends Assert {
 	public Iterator<Object[]> dataMkString() {
 		@SuppressWarnings("serial")
 		class Data extends LinkedList<Object[]> {
-			void data(String expected, String prefix, String sep, String suffix, Object... elements) {
+			void data(final String expected, final String prefix, final String sep, final String suffix,
+					final Object... elements) {
 				add(new Object[] { expected, null, prefix, sep, suffix, elements });
 			}
 
-			void dataConvert(String expected, F1<?, String> convert, String prefix, String sep, String suffix,
-					Object... elements) {
+			void dataConvert(final String expected, final F1<?, String> convert, final String prefix, final String sep,
+					final String suffix,
+					final Object... elements) {
 				add(new Object[] { expected, convert, prefix, sep, suffix, elements });
 			}
 		}
 		;
 
-		Data data = new Data();
+		final Data data = new Data();
 
 		data.data("ABC", null, null, null, "A", "B", "C");
 		data.data("ABC", null, "", null, "A", "B", "C");
@@ -73,8 +76,8 @@ public class FListTest extends Assert {
 		data.data("[A,B,C]", "[", ",", "]", "A", "B", "C");
 		data.data("[A,B,null]", "[", ",", "]", "A", "B", null);
 
-		F1<String, String> convert = new F1<String, String>() {
-			public String apply(String param) {
+		final F1<String, String> convert = new F1<String, String>() {
+			public String apply(final String param) {
 				return param == null ? "" : param;
 			}
 		};
@@ -85,8 +88,9 @@ public class FListTest extends Assert {
 	}
 
 	@Test(dataProvider = "dataMkString")
-	public <T> void testMkString(String expected, F1<T, String> convert, String prefix, String sep, String suffix,
-			T[] elements) {
+	public <T> void testMkString(final String expected, final F1<T, String> convert, final String prefix,
+			final String sep, final String suffix,
+			final T[] elements) {
 		assertEquals(mkString(Arrays.asList(elements), prefix, sep, suffix, convert), expected);
 		assertEquals(mkString(elements, prefix, sep, suffix, convert), expected);
 		if (convert == null) {
