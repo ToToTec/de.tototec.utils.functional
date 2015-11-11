@@ -1,6 +1,8 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
+// also update version in pom.xml example
+:functionalversion: 0.6.0
 
 image:https://travis-ci.org/ToToTec/de.tototec.utils.functional.svg?branch=master["Build Status", link="https://travis-ci.org/ToToTec/de.tototec.utils.functional"]
 image:https://img.shields.io/codacy/d6a2164c269d4a0a8245c12de43c5736.svg["Codacy Badge", link="https://www.codacy.com/p/3188/dashboard"]
@@ -13,7 +15,7 @@ This project consists of some useful helper classes and interfaces, which help t
 
 The classes are:
 
-* link:src/main/java/de/tototec/utils/functional/FList.java[`FList`] - contains static methods returning mostly `java.util.List` s and accepting `Iterable`s and arrays, like `map`, `flatMap`, `filter`, ...
+* link:src/main/java/de/tototec/utils/functional/FList.java[`FList`] - contains static methods returning mostly `java.util.List` s and accepting `Iterable` s and arrays, like `map`, `flatMap`, `filter`, ...
 * link:src/main/java/de/tototec/utils/functional/F0.java[`F0`], link:src/main/java/de/tototec/utils/functional/F1.java[`F1`], link:src/main/java/de/tototec/utils/functional/F2.java[`F2`], ... - Interfaces representing a function with n args where n is already in the name
 * link:src/main/java/de/tototec/utils/functional/Procedure0.java[`Procedure0`], link:src/main/java/de/tototec/utils/functional/Procedure1.java[`Procedure1`], link:src/main/java/de/tototec/utils/functional/Procedure2.java[`Procedure2`] - Interfaces representing a procedure with n args where n is given by the name
 * link:src/main/java/de/tototec/utils/functional/Optional.java[`Optional`] - An immutable class representing an optional value
@@ -74,15 +76,15 @@ Maven users can use the following dependency declaration:
 <dependency>
   <groupId>de.tototec</groupId>
   <artifactId>de.tototec.utils.functional</artifactId>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
 </dependency>
 ----
 
 http://sbuild.org[SBuild] users can use the following dependency:
 
-[source,scala]
+[source,scala,subs="attributes"]
 ----
-"mvn:de.tototec:de.tototec.utils.functional:0.5.0"
+"mvn:de.tototec:de.tototec.utils.functional:{functionalversion}"
 ----
 
 
@@ -143,3 +145,17 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 </plugin>
 ----
 
+== Changelog
+
+=== 0.6.0 - 2015-11-11
+
+* Changed order of type parameters in methods of FList
+* Added Optional.getOrElse
+* Added Optional.foreach
+* Added FList.contains
+* Added FList.containsAll
+* Added FList.toHashMap
+
+=== 0.5.0 - 2014-11-14
+
+* Initial Release after migration to GitHub
