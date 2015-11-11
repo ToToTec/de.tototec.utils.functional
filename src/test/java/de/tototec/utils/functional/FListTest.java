@@ -3,8 +3,11 @@ package de.tototec.utils.functional;
 import static de.tototec.utils.functional.FList.foldLeft;
 import static de.tototec.utils.functional.FList.mkString;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.List;
 
 import de.tobiasroeser.lambdatest.testng.FreeSpec;
 import de.tobiasroeser.lambdatest.testng.RunnableWithException;
@@ -55,6 +58,38 @@ public class FListTest extends FreeSpec {
 
 		testMkString("[A,B,]", nullSafeConvert, "[", ",", "]", "A", "B", null);
 
+		testContains("A", false);
+		testContains("A", true, "A", "B", "C");
+		testContains("B", true, "A", "B", "C");
+		testContains("C", true, "A", "B", "C");
+		testContains("D", false, "A", "B", "C");
+		testContains("", false, "A", "B", "C");
+		testContains(null, false, "A", "B", "C");
+		testContains(null, false);
+		testContains(null, true, "A", "B", null);
+
+		test("containsAll", new RunnableWithException() {
+			public void run() throws Exception {
+				final String[] array = new String[] { "A", "B", "C" };
+				final List<String> list = Arrays.asList(array);
+
+				assertTrue(FList.containsAll(array, new String[] { "C", "A" }));
+				assertTrue(FList.containsAll(list, Arrays.asList("C")));
+				assertFalse(FList.containsAll(array, Arrays.asList("A", "D")));
+				assertFalse(FList.containsAll(list, new String[] { "A", "D" }));
+			}
+		});
+
+	}
+
+	public <T> void testContains(final T test, final boolean contains, final T... elements) {
+		test("contains " + (contains ? "" : "not ") + test + " in " + Arrays.deepToString(elements),
+				new RunnableWithException() {
+					public void run() throws Exception {
+						assertEquals(FList.contains(elements, test), contains);
+						assertEquals(FList.contains(Arrays.asList(elements), test), contains);
+					}
+				});
 	}
 
 	public <T> void testFoldLeft(final T expected, final T left, final F2<T, T, T> function, final T... elements) {
