@@ -13,6 +13,44 @@ import java.util.Map;
 
 public abstract class FList {
 
+	public static <T> boolean contains(final Iterable<T> source, final T element) {
+		for (final T t : source) {
+			if (t == null) {
+				if (element == null) {
+					return true;
+				}
+			} else if (t.equals(element)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static <T> boolean contains(final T[] source, final T element) {
+		return contains(Arrays.asList(source), element);
+	}
+
+	public static <T> boolean containsAll(final Iterable<T> source, final Iterable<T> elements) {
+		for (final T e : elements) {
+			if (!contains(source, e)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static <T> boolean containsAll(final Iterable<T> source, final T[] elements) {
+		return containsAll(source, Arrays.asList(elements));
+	}
+
+	public static <T> boolean containsAll(final T[] source, final Iterable<T> elements) {
+		return containsAll(Arrays.asList(source), elements);
+	}
+
+	public static <T> boolean containsAll(final T[] source, final T[] elements) {
+		return containsAll(Arrays.asList(source), Arrays.asList(elements));
+	}
+
 	public static <T> List<T> distinct(final Iterable<T> source) {
 		final List<T> result = new LinkedList<T>();
 		for (final T t : source) {
