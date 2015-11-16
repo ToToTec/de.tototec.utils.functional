@@ -6,7 +6,7 @@
 
 	<groupId>de.tototec</groupId>
 	<artifactId>de.tototec.utils.functional</artifactId>
-	<version>0.6.0</version>
+	<version>0.6.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<name>Functional Utils</name>
