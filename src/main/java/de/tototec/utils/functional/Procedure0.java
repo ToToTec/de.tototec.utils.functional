@@ -6,7 +6,7 @@ public interface Procedure0 {
 	public static class AsRunnable implements Runnable {
 		private final Procedure0 procedure;
 
-		public AsRunnable(Procedure0 procedure) {
+		public AsRunnable(final Procedure0 procedure) {
 			this.procedure = procedure;
 		}
 
@@ -18,12 +18,20 @@ public interface Procedure0 {
 	public static class FromRunnable implements Procedure0 {
 		private final Runnable runnable;
 
-		public FromRunnable(Runnable runnable) {
+		public FromRunnable(final Runnable runnable) {
 			this.runnable = runnable;
 		}
 
 		public void apply() {
 			runnable.run();
 		}
+	}
+
+	public static class NoOp implements Procedure0 {
+
+		public void apply() {
+			// No op
+		}
+
 	}
 }
