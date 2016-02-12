@@ -9,8 +9,8 @@ import static org.testng.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
+import de.tobiasroeser.lambdatest.RunnableWithException;
 import de.tobiasroeser.lambdatest.testng.FreeSpec;
-import de.tobiasroeser.lambdatest.testng.RunnableWithException;
 
 public class FListTest extends FreeSpec {
 

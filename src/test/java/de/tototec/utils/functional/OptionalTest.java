@@ -3,8 +3,8 @@ package de.tototec.utils.functional;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
+import de.tobiasroeser.lambdatest.RunnableWithException;
 import de.tobiasroeser.lambdatest.testng.FreeSpec;
-import de.tobiasroeser.lambdatest.testng.RunnableWithException;
 
 public class OptionalTest extends FreeSpec {
 
