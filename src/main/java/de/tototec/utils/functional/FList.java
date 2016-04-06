@@ -159,7 +159,7 @@ public abstract class FList {
 		return flatMap(Arrays.asList(source), convert);
 	}
 
-	public static <T> List<T> flatten(final Iterable<Iterable<T>> source) {
+	public static <T, R extends Iterable<T>> List<T> flatten(final Iterable<R> source) {
 		final LinkedList<T> result = new LinkedList<T>();
 		for (final Iterable<T> list : source) {
 			if (list instanceof Collection<?>) {
