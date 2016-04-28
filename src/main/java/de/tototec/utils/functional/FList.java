@@ -259,6 +259,23 @@ public abstract class FList {
 		return result;
 	}
 
+	public static <T> Optional<T> headOption(final Iterable<T> source) {
+		final Iterator<T> it = source.iterator();
+		if (it.hasNext()) {
+			return Optional.some(it.next());
+		} else {
+			return Optional.<T> none();
+		}
+	}
+
+	public static <T> Optional<T> headOption(final T[] source) {
+		if (source.length == 0) {
+			return Optional.<T> none();
+		} else {
+			return Optional.some(source[0]);
+		}
+	}
+
 	public static <T, R> List<R> map(final Iterable<T> source, final F1<? super T, ? extends R> convert) {
 		final List<R> result = (source instanceof Collection<?>) ? new ArrayList<R>(((Collection<?>) source).size())
 				: new LinkedList<R>();
