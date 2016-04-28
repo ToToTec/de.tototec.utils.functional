@@ -51,6 +51,10 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		}
 	}
 
+	/**
+	 * @deprecated Use getOrElseF instead.
+	 */
+	@Deprecated
 	public T getOrElse(final F0<T> f) {
 		if (isDefined()) {
 			return optional;
@@ -64,6 +68,14 @@ public class Optional<T> implements Iterable<T>, Serializable {
 			return optional;
 		} else {
 			return t;
+		}
+	}
+
+	public T getOrElseF(final F0<T> f) {
+		if (isDefined()) {
+			return optional;
+		} else {
+			return f.apply();
 		}
 	}
 

@@ -1,8 +1,7 @@
 package de.tototec.utils.functional;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-
+import static de.tobiasroeser.lambdatest.Expect.expectEquals;
+import static de.tobiasroeser.lambdatest.Expect.expectNotEquals;
 import de.tobiasroeser.lambdatest.RunnableWithException;
 import de.tobiasroeser.lambdatest.testng.FreeSpec;
 
@@ -13,26 +12,31 @@ public class OptionalTest extends FreeSpec {
 		final Object o1 = new Object();
 
 		test("Optional.getOrElse", new RunnableWithException() {
+			@Override
 			public void run() throws Exception {
-				assertEquals(Optional.none().getOrElse(o1), o1);
-				assertEquals(Optional.some(o1).getOrElse(o1), o1);
-				assertNotEquals(Optional.some(new Object()).getOrElse(o1), o1);
+				expectEquals(Optional.none().getOrElse(o1), o1);
+				expectEquals(Optional.some(o1).getOrElse(o1), o1);
+				expectNotEquals(Optional.some(new Object()).getOrElse(o1), o1);
 			}
 		});
 
-		test("Optional.getOrElseF0", new RunnableWithException() {
+		test("Optional.getOrElseF", new RunnableWithException() {
+			@Override
 			public void run() throws Exception {
-				assertEquals(Optional.none().getOrElse(new F0<Object>() {
+				expectEquals(Optional.none().getOrElseF(new F0<Object>() {
+					@Override
 					public Object apply() {
 						return o1;
 					}
 				}), o1);
-				assertEquals(Optional.some(o1).getOrElse(new F0<Object>() {
+				expectEquals(Optional.some(o1).getOrElseF(new F0<Object>() {
+					@Override
 					public Object apply() {
 						return o1;
 					}
 				}), o1);
-				assertNotEquals(Optional.some(new Object()).getOrElse(new F0<Object>() {
+				expectNotEquals(Optional.some(new Object()).getOrElseF(new F0<Object>() {
+					@Override
 					public Object apply() {
 						return o1;
 					}
