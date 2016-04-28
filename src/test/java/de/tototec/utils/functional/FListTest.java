@@ -1,5 +1,6 @@
 package de.tototec.utils.functional;
 
+import static de.tobiasroeser.lambdatest.Expect.expectEquals;
 import static de.tototec.utils.functional.FList.foldLeft;
 import static de.tototec.utils.functional.FList.mkString;
 import static org.testng.Assert.assertEquals;
@@ -80,6 +81,11 @@ public class FListTest extends FreeSpec {
 			}
 		});
 
+		testHeadOption();
+		testHeadOption((Object) null);
+		testHeadOption(null, "1", null);
+		testHeadOption(1L, 2L);
+
 	}
 
 	public <T> void testContains(final T test, final boolean contains, final T... elements) {
@@ -113,6 +119,24 @@ public class FListTest extends FreeSpec {
 				}
 			}
 		});
+	}
+
+	public <T> void testHeadOption(final T... elements) {
+		if (elements.length == 0) {
+			test("Flist.headOption given Optional.NONE for empty source", () -> {
+				// array version
+				expectEquals(FList.headOption(elements), Optional.none());
+				// list version
+				expectEquals(FList.headOption(Arrays.asList(elements)), Optional.none());
+			});
+		} else {
+			test("Flist.headOption gives first element as Optional", () -> {
+				// array version
+				expectEquals(FList.headOption(elements), Optional.some(elements[0]));
+				// list version
+				expectEquals(FList.headOption(Arrays.asList(elements)), Optional.some(elements[0]));
+			});
+		}
 	}
 
 }
