@@ -110,6 +110,22 @@ public abstract class FList {
 		return filter(Arrays.asList(source), accept);
 	}
 
+	public static <T> List<T> filterNotNull(final Iterable<?> source) {
+		final List<T> result = new LinkedList<T>();
+		for (final Object object : source) {
+			if (object != null) {
+				@SuppressWarnings("unchecked")
+				final T t = (T) object;
+				result.add(t);
+			}
+		}
+		return result;
+	}
+
+	public static <T> List<T> filterNotNull(final Object[] source) {
+		return filterNotNull(Arrays.asList(source));
+	}
+
 	public static <T> List<T> filterType(final Iterable<?> source, final Class<T> type) {
 		final List<T> result = new LinkedList<T>();
 		for (final Object object : source) {

@@ -96,6 +96,11 @@ public class FListTest extends FreeSpec {
 		testTail("1", "2", "3");
 		testTail(null, null, null);
 
+		test("filterNotNull removes null-entries", () -> {
+			expectEquals(FList.filterNotNull(new String[] { "1", null, "3", null }), Arrays.asList("1", "3"));
+			expectEquals(FList.filterNotNull(Arrays.asList("1", null, "3", null)), Arrays.asList("1", "3"));
+		});
+
 	}
 
 	public <T> void testContains(final T test, final boolean contains, final T... elements) {
