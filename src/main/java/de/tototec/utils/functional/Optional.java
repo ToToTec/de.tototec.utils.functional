@@ -126,7 +126,7 @@ public class Optional<T> implements Iterable<T>, Serializable {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "(" + (isDefined() ? optional : "") + ")";
+		return getClass().getSimpleName() + (isEmpty() ? ".NONE" : "(" + optional + ")");
 	}
 
 	@Override
