@@ -86,6 +86,14 @@ public class FListTest extends FreeSpec {
 		testHeadOption(null, "1", null);
 		testHeadOption(1L, 2L);
 
+		testTail();
+		testTail((Object) null);
+		testTail("1");
+		testTail(1L);
+		testTail(1, 2, 3);
+		testTail("1", "2", "3");
+		testTail(null, null, null);
+
 	}
 
 	public <T> void testContains(final T test, final boolean contains, final T... elements) {
@@ -135,6 +143,36 @@ public class FListTest extends FreeSpec {
 				expectEquals(FList.headOption(elements), Optional.some(elements[0]));
 				// list version
 				expectEquals(FList.headOption(Arrays.asList(elements)), Optional.some(elements[0]));
+			});
+		}
+	}
+
+	public <T> void testTail(final T... elements) {
+		if (elements.length == 0) {
+			test("Flist.tail given empty list for empty source", () -> {
+				// array version
+				expectEquals(FList.tail(elements), Arrays.asList());
+				// list version
+				expectEquals(FList.tail(Arrays.asList(elements)), Arrays.asList());
+			});
+		} else if (elements.length == 1) {
+			test("Flist.tail given empty list for single-element source", () -> {
+				// array version
+				expectEquals(FList.tail(elements), Arrays.asList());
+				// list version
+				expectEquals(FList.tail(Arrays.asList(elements)), Arrays.asList());
+			});
+		} else {
+			test("Flist.tail gives tail list", () -> {
+				final T[] copy = Arrays.copyOfRange(elements, 1, elements.length);
+				// array version
+				final List<T> arrayResult = FList.tail(elements);
+				expectEquals(arrayResult, Arrays.asList(copy));
+				expectEquals(arrayResult.size(), elements.length - 1);
+				// list version
+				final List<T> listResult = FList.tail(Arrays.asList(elements));
+				expectEquals(listResult, Arrays.asList(copy));
+				expectEquals(listResult.size(), elements.length - 1);
 			});
 		}
 	}

@@ -401,6 +401,23 @@ public abstract class FList {
 		return sortWith(Arrays.asList(source), convert);
 	}
 
+	public static <T> List<T> tail(final Iterable<T> source) {
+		final Iterator<T> it = source.iterator();
+		if (it.hasNext()) {
+			// drop first element
+			it.next();
+		}
+		final List<T> result = new LinkedList<T>();
+		while (it.hasNext()) {
+			result.add(it.next());
+		}
+		return result;
+	}
+
+	public static <T> List<T> tail(final T[] source) {
+		return tail(Arrays.asList(source));
+	}
+
 	public static <T> List<T> takeWhile(final Iterable<T> source, final F1<? super T, Boolean> accept) {
 		final List<T> result = new LinkedList<T>();
 		for (final T t : source) {
