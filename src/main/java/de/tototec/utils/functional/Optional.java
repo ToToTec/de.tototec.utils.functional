@@ -79,6 +79,22 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		}
 	}
 
+	public Optional<T> orElse(final Optional<T> t) {
+		if (isDefined()) {
+			return this;
+		} else {
+			return t;
+		}
+	}
+
+	public Optional<T> orElseF(final F0<Optional<T>> f) {
+		if (isDefined()) {
+			return this;
+		} else {
+			return f.apply();
+		}
+	}
+
 	public T orNull() {
 		return isDefined() ? optional : null;
 	}
@@ -116,6 +132,7 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		return isDefined() ? Arrays.<T> asList(optional) : Collections.<T> emptyList();
 	}
 
+	@Override
 	public Iterator<T> iterator() {
 		return toList().iterator();
 	}
