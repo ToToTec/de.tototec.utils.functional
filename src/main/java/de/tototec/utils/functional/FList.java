@@ -13,6 +13,23 @@ import java.util.Map;
 
 public abstract class FList {
 
+	// TODO: concat
+
+	public static <T, A extends T, B extends T> List<T> concat(final A[] first, final B[] second) {
+		return concat(Arrays.asList(first), Arrays.asList(second));
+	}
+
+	public static <T, A extends T, B extends T> List<T> concat(final Iterable<A> first, final Iterable<B> second) {
+		final LinkedList<T> result = new LinkedList<T>();
+		for (final A a : first) {
+			result.add(a);
+		}
+		for (final B b : second) {
+			result.add(b);
+		}
+		return result;
+	}
+
 	public static <T> boolean contains(final Iterable<T> source, final T element) {
 		for (final T t : source) {
 			if (t == null) {

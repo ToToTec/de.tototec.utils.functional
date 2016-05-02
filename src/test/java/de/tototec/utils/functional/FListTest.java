@@ -101,6 +101,11 @@ public class FListTest extends FreeSpec {
 			expectEquals(FList.filterNotNull(Arrays.asList("1", null, "3", null)), Arrays.asList("1", "3"));
 		});
 
+		testConcat();
+		testConcat("1");
+		testConcat("1", "2");
+		testConcat("1", "2", "3", "4");
+
 	}
 
 	public <T> void testContains(final T test, final boolean contains, final T... elements) {
@@ -185,6 +190,16 @@ public class FListTest extends FreeSpec {
 				expectEquals(listResult.size(), elements.length - 1);
 			});
 		}
+	}
+
+	public <T> void testConcat(final T... ts) {
+		test("concat works", () -> {
+			final int half = ts.length / 2;
+			final T[] left = Arrays.copyOfRange(ts, 0, half);
+			final T[] right = Arrays.copyOfRange(ts, half, ts.length);
+			expectEquals(FList.concat(left, right), Arrays.asList(ts));
+			expectEquals(FList.concat(Arrays.asList(left), Arrays.asList(right)), Arrays.asList(ts));
+		});
 	}
 
 }
