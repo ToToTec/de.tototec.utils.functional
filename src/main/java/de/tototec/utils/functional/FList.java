@@ -30,6 +30,26 @@ public abstract class FList {
 		return result;
 	}
 
+	public static <T, A extends T, B extends T, C extends T> List<T> concat(final A[] first, final B[] second,
+			final C[] third) {
+		return concat(Arrays.asList(first), Arrays.asList(second), Arrays.asList(third));
+	}
+
+	public static <T, A extends T, B extends T, C extends T> List<T> concat(final Iterable<A> first,
+			final Iterable<B> second, final Iterable<C> third) {
+		final LinkedList<T> result = new LinkedList<T>();
+		for (final A a : first) {
+			result.add(a);
+		}
+		for (final B b : second) {
+			result.add(b);
+		}
+		for (final C c : third) {
+			result.add(c);
+		}
+		return result;
+	}
+
 	public static <T> boolean contains(final Iterable<T> source, final T element) {
 		for (final T t : source) {
 			if (t == null) {
@@ -67,6 +87,8 @@ public abstract class FList {
 	public static <T> boolean containsAll(final T[] source, final T[] elements) {
 		return containsAll(Arrays.asList(source), Arrays.asList(elements));
 	}
+
+	// TODO: diff
 
 	public static <T> List<T> distinct(final Iterable<T> source) {
 		final List<T> result = new LinkedList<T>();
@@ -112,6 +134,8 @@ public abstract class FList {
 	public static <T> boolean exists(final T[] source, final F1<? super T, Boolean> exists) {
 		return exists(Arrays.asList(source), exists);
 	}
+
+	// TODO: fill
 
 	public static <T> List<T> filter(final Iterable<T> source, final F1<? super T, Boolean> accept) {
 		final List<T> result = new LinkedList<T>();
@@ -318,6 +342,8 @@ public abstract class FList {
 		return result;
 	}
 
+	// TODO: intersect
+
 	public static <T, R> List<R> map(final T[] source, final F1<? super T, ? extends R> convert) {
 		return map(Arrays.asList(source), convert);
 	}
@@ -335,7 +361,8 @@ public abstract class FList {
 		return mkString(source, prefix, separator, suffix, null);
 	}
 
-	public static <T> String mkString(final T[] source, final String prefix, final String separator, final String suffix) {
+	public static <T> String mkString(final T[] source, final String prefix, final String separator,
+			final String suffix) {
 		return mkString(Arrays.asList(source), prefix, separator, suffix);
 	}
 
@@ -422,8 +449,10 @@ public abstract class FList {
 		return sort(Arrays.asList(source), comparator);
 	}
 
-	public static <T, C extends Comparable<C>> List<T> sortWith(final Iterable<T> source, final F1<? super T, C> convert) {
+	public static <T, C extends Comparable<C>> List<T> sortWith(final Iterable<T> source,
+			final F1<? super T, C> convert) {
 		return sort(source, new Comparator<T>() {
+			@Override
 			public int compare(final T o1, final T o2) {
 				return convert.apply(o1).compareTo(convert.apply(o2));
 			};
@@ -478,6 +507,8 @@ public abstract class FList {
 	public static <K, V> LinkedHashMap<K, V> toHashMap(final Tuple2<K, V>[] source) {
 		return toHashMap(Arrays.asList(source));
 	}
+
+	// TODO: union
 
 	public static <A, B> List<Tuple2<A, B>> zip(final A[] as, final B[] bs) {
 		return zip(Arrays.asList(as), Arrays.asList(bs));

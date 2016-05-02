@@ -193,7 +193,7 @@ public class FListTest extends FreeSpec {
 	}
 
 	public <T> void testConcat(final T... ts) {
-		test("concat works", () -> {
+		test("concat for two works", () -> {
 			final int half = ts.length / 2;
 			final T[] left = Arrays.copyOfRange(ts, 0, half);
 			final T[] right = Arrays.copyOfRange(ts, half, ts.length);
