@@ -147,6 +147,18 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
+==== {master}
+
+* Added no-op impls for Procedure interfaces
+* Improved / fixed signature of FList.flatten
+* Changed toString of Optional
+* Added FList.headOption
+* Added FList.tail
+* Added Optional.getOrElseF
+* Added Optional.orElse and Optional.orElseF
+* Added FList.filterNotNull
+* Added FList.concat
+
 === 0.6.0 - 2015-11-11
 
 * Changed order of type parameters in methods of FList
