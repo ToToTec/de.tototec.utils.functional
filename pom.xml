@@ -48,8 +48,7 @@
 		<dependency>
 			<groupId>de.tototec</groupId>
 			<artifactId>de.tobiasroeser.lambdatest</artifactId>
-			<version>0.2.0</version>
-			<classifier>java6</classifier>
+			<version>0.2.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -60,7 +59,7 @@
 				<!-- Check that no Java6+ API is used -->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>animal-sniffer-maven-plugin</artifactId>
-				<version>1.11</version>
+				<version>1.15</version>
 				<executions>
 					<execution>
 						<id>signature-check</id>
