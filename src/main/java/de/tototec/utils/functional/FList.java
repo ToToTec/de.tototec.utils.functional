@@ -230,7 +230,7 @@ public abstract class FList {
 		return result;
 	}
 
-	public static <T> List<T> flatten(final Iterable<T>[] source) {
+	public static <T, R extends Iterable<T>> List<T> flatten(final R[] source) {
 		return flatten(Arrays.asList(source));
 	}
 
