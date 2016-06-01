@@ -93,7 +93,7 @@ public abstract class FList {
 	public static <T> List<T> distinct(final Iterable<T> source) {
 		final List<T> result = new LinkedList<T>();
 		for (final T t : source) {
-			if (!result.contains(source)) {
+			if (!result.contains(t)) {
 				result.add(t);
 			}
 		}

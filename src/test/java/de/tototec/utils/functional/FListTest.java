@@ -106,6 +106,28 @@ public class FListTest extends FreeSpec {
 		testConcat("1", "2");
 		testConcat("1", "2", "3", "4");
 
+		testDistinct(Arrays.asList("1", "2", "3"), "1", "2", "3");
+		testDistinct(Arrays.asList("1", "2"), "1", "2", "1");
+		testDistinct(Arrays.asList("1", "2"), "1", "2", "1");
+
+	}
+
+	private <T> void testDistinct(final List<T> expected, final T... test) {
+		test("distinct for array " + mkString(test, "[", ",", "]") + " results in " + mkString(expected, "[", ",", "]"),
+				new RunnableWithException() {
+					@Override
+					public void run() throws Exception {
+						expectEquals(FList.distinct(test), expected);
+					}
+				});
+		test("distinct for iterable " + mkString(test, "[", ",", "]") + " results in "
+				+ mkString(expected, "[", ",", "]"),
+				new RunnableWithException() {
+					@Override
+					public void run() throws Exception {
+						expectEquals(FList.distinct(Arrays.asList(test)), expected);
+					}
+				});
 	}
 
 	public <T> void testContains(final T test, final boolean contains, final T... elements) {
