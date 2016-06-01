@@ -8,31 +8,20 @@ import static de.tototec.utils.functional.FList.mkString;
 import java.util.Arrays;
 import java.util.List;
 
-import de.tobiasroeser.lambdatest.RunnableWithException;
 import de.tobiasroeser.lambdatest.testng.FreeSpec;
 
 public class FListTest extends FreeSpec {
 
 	public FListTest() {
 
-		final F2<Integer, Integer, Integer> add = new F2<Integer, Integer, Integer>() {
-			@Override
-			public Integer apply(final Integer p1, final Integer p2) {
-				return p1 + p2;
-			}
-		};
+		final F2<Integer, Integer, Integer> add = (p1, p2) -> p1 + p2;
 
 		testFoldLeft(0, 0, add);
 		testFoldLeft(1, 0, add, 1);
 		testFoldLeft(3, 0, add, 1, 2);
 		testFoldLeft(6, 0, add, 1, 2, 3);
 
-		final F2<Integer, Integer, Integer> multiply = new F2<Integer, Integer, Integer>() {
-			@Override
-			public Integer apply(final Integer p1, final Integer p2) {
-				return p1 * p2;
-			}
-		};
+		final F2<Integer, Integer, Integer> multiply = (p1, p2) -> p1 * p2;
 
 		testFoldLeft(1, 1, multiply);
 		testFoldLeft(1, 1, multiply, 1);
@@ -51,12 +40,7 @@ public class FListTest extends FreeSpec {
 		testMkString("[A,B,C]", noConvert, "[", ",", "]", "A", "B", "C");
 		testMkString("[A,B,null]", noConvert, "[", ",", "]", "A", "B", null);
 
-		final F1<String, String> nullSafeConvert = new F1<String, String>() {
-			@Override
-			public String apply(final String param) {
-				return param == null ? "" : param;
-			}
-		};
+		final F1<String, String> nullSafeConvert = param -> param == null ? "" : param;
 
 		testMkString("[A,B,]", nullSafeConvert, "[", ",", "]", "A", "B", null);
 
@@ -70,17 +54,14 @@ public class FListTest extends FreeSpec {
 		testContains(null, false);
 		testContains(null, true, "A", "B", null);
 
-		test("containsAll", new RunnableWithException() {
-			@Override
-			public void run() throws Exception {
-				final String[] array = new String[] { "A", "B", "C" };
-				final List<String> list = Arrays.asList(array);
+		test("containsAll", () -> {
+			final String[] array = new String[] { "A", "B", "C" };
+			final List<String> list = Arrays.asList(array);
 
-				expectTrue(FList.containsAll(array, new String[] { "C", "A" }));
-				expectTrue(FList.containsAll(list, Arrays.asList("C")));
-				expectFalse(FList.containsAll(array, Arrays.asList("A", "D")));
-				expectFalse(FList.containsAll(list, new String[] { "A", "D" }));
-			}
+			expectTrue(FList.containsAll(array, new String[] { "C", "A" }));
+			expectTrue(FList.containsAll(list, Arrays.asList("C")));
+			expectFalse(FList.containsAll(array, Arrays.asList("A", "D")));
+			expectFalse(FList.containsAll(list, new String[] { "A", "D" }));
 		});
 
 		testHeadOption();
@@ -114,54 +95,38 @@ public class FListTest extends FreeSpec {
 
 	private <T> void testDistinct(final List<T> expected, final T... test) {
 		test("distinct for array " + mkString(test, "[", ",", "]") + " results in " + mkString(expected, "[", ",", "]"),
-				new RunnableWithException() {
-					@Override
-					public void run() throws Exception {
-						expectEquals(FList.distinct(test), expected);
-					}
+				() -> {
+					expectEquals(FList.distinct(test), expected);
 				});
 		test("distinct for iterable " + mkString(test, "[", ",", "]") + " results in "
-				+ mkString(expected, "[", ",", "]"),
-				new RunnableWithException() {
-					@Override
-					public void run() throws Exception {
-						expectEquals(FList.distinct(Arrays.asList(test)), expected);
-					}
+				+ mkString(expected, "[", ",", "]"), () -> {
+					expectEquals(FList.distinct(Arrays.asList(test)), expected);
 				});
 	}
 
 	public <T> void testContains(final T test, final boolean contains, final T... elements) {
 		test("contains " + (contains ? "" : "not ") + test + " in " + Arrays.deepToString(elements),
-				new RunnableWithException() {
-					@Override
-					public void run() throws Exception {
-						expectEquals(FList.contains(elements, test), contains);
-						expectEquals(FList.contains(Arrays.asList(elements), test), contains);
-					}
+				() -> {
+					expectEquals(FList.contains(elements, test), contains);
+					expectEquals(FList.contains(Arrays.asList(elements), test), contains);
 				});
 	}
 
 	public <T> void testFoldLeft(final T expected, final T left, final F2<T, T, T> function, final T... elements) {
-		test("FList.foldLeft: " + Arrays.deepToString(elements), new RunnableWithException() {
-			@Override
-			public void run() throws Exception {
-				expectEquals(foldLeft(elements, left, function), expected);
-				expectEquals(foldLeft(Arrays.asList(elements), left, function), expected);
-			}
+		test("FList.foldLeft: " + Arrays.deepToString(elements), () -> {
+			expectEquals(foldLeft(elements, left, function), expected);
+			expectEquals(foldLeft(Arrays.asList(elements), left, function), expected);
 		});
 	}
 
 	public <T> void testMkString(final String expected, final F1<T, String> convert, final String prefix,
 			final String sep, final String suffix, final T... elements) {
-		test("FList.mkString should result in " + expected, new RunnableWithException() {
-			@Override
-			public void run() throws Exception {
-				expectEquals(mkString(Arrays.asList(elements), prefix, sep, suffix, convert), expected);
-				expectEquals(mkString(elements, prefix, sep, suffix, convert), expected);
-				if (convert == null) {
-					expectEquals(mkString(Arrays.asList(elements), prefix, sep, suffix), expected);
-					expectEquals(mkString(elements, prefix, sep, suffix), expected);
-				}
+		test("FList.mkString should result in " + expected, () -> {
+			expectEquals(mkString(Arrays.asList(elements), prefix, sep, suffix, convert), expected);
+			expectEquals(mkString(elements, prefix, sep, suffix, convert), expected);
+			if (convert == null) {
+				expectEquals(mkString(Arrays.asList(elements), prefix, sep, suffix), expected);
+				expectEquals(mkString(elements, prefix, sep, suffix), expected);
 			}
 		});
 	}
