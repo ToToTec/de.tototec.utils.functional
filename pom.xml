@@ -6,7 +6,7 @@
 
 	<groupId>de.tototec</groupId>
 	<artifactId>de.tototec.utils.functional</artifactId>
-	<version>0.6.1-SNAPSHOT</version>
+	<version>0.7.0</version>
 	<packaging>bundle</packaging>
 
 	<name>Functional Utils</name>
@@ -82,6 +82,13 @@
 				<artifactId>maven-bundle-plugin</artifactId>
 				<version>3.0.1</version>
 				<extensions>true</extensions>
+				<dependencies>
+					<dependency>
+						<groupId>biz.aQute.bnd</groupId>
+						<artifactId>biz.aQute.bndlib</artifactId>
+						<version>3.2.0</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<phase>verify</phase>

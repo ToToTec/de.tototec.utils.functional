@@ -1,8 +1,7 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
-// also update version in pom.xml example
-:functionalversion: 0.6.0
+:functionalversion: 0.7.0
 
 image:https://travis-ci.org/ToToTec/de.tototec.utils.functional.svg?branch=master["Build Status", link="https://travis-ci.org/ToToTec/de.tototec.utils.functional"]
 image:https://img.shields.io/codacy/d6a2164c269d4a0a8245c12de43c5736.svg["Codacy Badge", link="https://www.codacy.com/p/3188/dashboard"]
@@ -71,12 +70,12 @@ Functional Utils is available from http://search.maven.org/#search|gav|1|g%3A%22
 
 Maven users can use the following dependency declaration:
 
-[source,xml]
+[source,xml,subs="attributes,verbatim"]
 ----
 <dependency>
   <groupId>de.tototec</groupId>
   <artifactId>de.tototec.utils.functional</artifactId>
-  <version>0.6.0</version>
+  <version>{functionalversion}</version>
 </dependency>
 ----
 
@@ -147,7 +146,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
-==== {master}
+==== 0.7.0 - 2016-06-01
 
 * Fixed faulty FList.distict method
 * Added no-op impls for Procedure interfaces
