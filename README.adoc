@@ -149,6 +149,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 ==== {master}
 
+* Fixed faulty FList.distict method
 * Added no-op impls for Procedure interfaces
 * Improved / fixed signature of FList.flatten
 * Changed toString of Optional
