@@ -4,7 +4,7 @@ import de.tototec.sbuild._
 class SBuild(implicit _project: Project) {
 
   Target("phony:testCp") dependsOn
-    "mvn:org.testng:testng:6.8" ~
-    "mvn:de.tototec:de.tobiasroeser.lambdatest:0.2.0;classifier=java6"
+    "mvn:org.testng:testng:6.9.10" ~
+    "mvn:de.tototec:de.tobiasroeser.lambdatest:0.2.3"
 
 }
