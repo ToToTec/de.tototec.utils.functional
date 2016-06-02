@@ -6,7 +6,7 @@
 
 	<groupId>de.tototec</groupId>
 	<artifactId>de.tototec.utils.functional</artifactId>
-	<version>0.7.0</version>
+	<version>0.7.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<name>Functional Utils</name>
@@ -36,6 +36,8 @@
 		<maven.compiler.testTarget>1.8</maven.compiler.testTarget>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bundle.namespace>${project.artifactId}</bundle.namespace>
+		<asciidoclet.version>1.5.4</asciidoclet.version>
+		<bndlib.version>3.2.0</bndlib.version>
 	</properties>
 
 	<dependencies>
@@ -55,6 +57,7 @@
 
 	<build>
 		<plugins>
+
 			<plugin>
 				<!-- Check that no Java6+ API is used -->
 				<groupId>org.codehaus.mojo</groupId>
@@ -77,6 +80,7 @@
 					</signature>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -86,7 +90,7 @@
 					<dependency>
 						<groupId>biz.aQute.bnd</groupId>
 						<artifactId>biz.aQute.bndlib</artifactId>
-						<version>3.2.0</version>
+						<version>${bndlib.version}</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -110,6 +114,32 @@
 					</instructions>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<doclet>org.asciidoctor.Asciidoclet</doclet>
+					<docletArtifact>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoclet</artifactId>
+						<version>${asciidoclet.version}</version>
+					</docletArtifact>
+					<overview>README.adoc</overview>
+					<additionalparam><![CDATA[
+						--base-dir ${project.basedir}
+						--attribute "name=${project.name}"
+						--attribute "version=${project.version}"
+						--attribute "functionalversion=${project.version}"
+						--attribute	"title-link=https://github.com/ToToTec/de.tototec.utils.functional[${project.name} ${project.version}]"
+						--attribute "env-asciidoclet=true"
+					]]>
+					</additionalparam>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
