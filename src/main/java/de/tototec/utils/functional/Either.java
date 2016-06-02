@@ -2,6 +2,16 @@ package de.tototec.utils.functional;
 
 import java.io.Serializable;
 
+/**
+ * Value class representing exactly one of two options, left or right.
+ *
+ * This class is immutable and thus threadsafe.
+ *
+ * @param <L>
+ *            The type of the left option.
+ * @param <R>
+ *            The type of the right option.
+ */
 public class Either<L, R> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,7 @@
 package de.tototec.utils.functional;
 
 public interface Procedure0 {
+
 	public void apply();
 
 	public static class AsRunnable implements Runnable {
@@ -10,6 +11,7 @@ public interface Procedure0 {
 			this.procedure = procedure;
 		}
 
+		@Override
 		public void run() {
 			procedure.apply();
 		}
@@ -22,6 +24,7 @@ public interface Procedure0 {
 			this.runnable = runnable;
 		}
 
+		@Override
 		public void apply() {
 			runnable.run();
 		}
@@ -29,6 +32,7 @@ public interface Procedure0 {
 
 	public static class NoOp implements Procedure0 {
 
+		@Override
 		public void apply() {
 			// No op
 		}

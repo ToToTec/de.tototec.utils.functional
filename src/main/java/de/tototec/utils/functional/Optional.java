@@ -6,14 +6,28 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Value class representing an optional value.
+ *
+ * This class is immutable and thus thread-safe.
+ *
+ * @param <T>
+ *            The type of the optional value.
+ */
 public class Optional<T> implements Iterable<T>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Create a defined {@link Optional} with the given value +some+.
+	 */
 	public static <S> Optional<S> some(final S some) {
 		return new Optional<S>(some);
 	}
 
+	/**
+	 * Create an empty {@link Optional}.
+	 */
 	public static <S> Optional<S> lift(final S someOrNull) {
 		if (someOrNull == null) {
 			return new Optional<S>();

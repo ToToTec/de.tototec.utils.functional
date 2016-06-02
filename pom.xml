@@ -133,7 +133,7 @@
 						--attribute "name=${project.name}"
 						--attribute "version=${project.version}"
 						--attribute "functionalversion=${project.version}"
-						--attribute	"title-link=https://github.com/ToToTec/de.tototec.utils.functional[${project.name} ${project.version}]"
+						--attribute "title-link=https://github.com/ToToTec/de.tototec.utils.functional[${project.name} ${project.version}]"
 						--attribute "env-asciidoclet=true"
 					]]>
 					</additionalparam>

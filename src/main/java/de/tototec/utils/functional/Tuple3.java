@@ -2,6 +2,18 @@ package de.tototec.utils.functional;
 
 import java.io.Serializable;
 
+/**
+ * Value class representing a 3-tuple.
+ *
+ * This class is immutable and thus thread-safe.
+ *
+ * @param <A>
+ *            The type of the first element.
+ * @param <B>
+ *            The type of the second element.
+ * @param <C>
+ *            The type of the third element.
+ */
 public class Tuple3<A, B, C> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -2,6 +2,20 @@ package de.tototec.utils.functional;
 
 import java.io.Serializable;
 
+/**
+ * Value class representing a 4-tuple.
+ *
+ * This class is immutable and thus thread-safe.
+ *
+ * @param <A>
+ *            The type of the first element.
+ * @param <B>
+ *            The type of the second element.
+ * @param <C>
+ *            The type of the third element.
+ * @param <D>
+ *            The type of the fourth element.
+ */
 public class Tuple4<A, B, C, D> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +37,7 @@ public class Tuple4<A, B, C, D> implements Serializable {
 	private final C c;
 	private final D d;
 
-	private Tuple4(final A a, final B b, final C c, D d) {
+	private Tuple4(final A a, final B b, final C c, final D d) {
 		this.a = a;
 		this.b = b;
 		this.c = c;

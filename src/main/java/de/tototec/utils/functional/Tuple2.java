@@ -2,6 +2,16 @@ package de.tototec.utils.functional;
 
 import java.io.Serializable;
 
+/**
+ * Value class representing a 2-tuple.
+ *
+ * This class is immutable and thus thread-safe.
+ *
+ * @param <A>
+ *            The type of the first element.
+ * @param <B>
+ *            The type of the second element.
+ */
 public class Tuple2<A, B> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
