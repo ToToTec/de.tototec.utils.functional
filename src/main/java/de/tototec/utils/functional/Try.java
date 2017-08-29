@@ -9,6 +9,17 @@ public class Try<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static <T> Try<T> success(final T success) {
+		return new Try<T>(null, success, true);
+	}
+
+	public static <T> Try<T> failure(final Throwable failure) {
+		if (isFatal(failure)) {
+			Util.<RuntimeException, T> sneakyThrow(failure);
+		}
+		return new Try<T>(failure, null, true);
+	}
+
 	public static <T> Try<T> of(final CheckedF0<T> provider) {
 		try {
 			return new Try<T>(null, provider.apply(), true);
@@ -18,14 +29,6 @@ public class Try<T> implements Serializable {
 			}
 			return new Try<T>(e, null, false);
 		}
-	}
-
-	public static <T> Try<T> error(final Throwable error) {
-		return new Try<T>(error, null, false);
-	}
-
-	public static <T> Try<T> value(final T value) {
-		return new Try<T>(null, value, true);
 	}
 
 	public static boolean isFatal(final Throwable throwable) {
@@ -156,6 +159,43 @@ public class Try<T> implements Serializable {
 			}
 		}
 		return true;
+	}
+
+	public T getOrElse(final T t) {
+		if (isSuccess) {
+			return get();
+		} else {
+			return t;
+		}
+	}
+
+	public T getOrElseF(final F0<T> f) {
+		if (isSuccess) {
+			return get();
+		} else {
+			return f.apply();
+		}
+	}
+
+	public <U extends T> Try<U> orElseF(final CheckedF0<Try<U>> f) {
+		if (isSuccess) {
+			return (Try<U>) this;
+		} else {
+			try {
+				return f.apply();
+			} catch (final Throwable e) {
+				if (isFatal(e)) {
+					Util.<RuntimeException, U> sneakyThrow(e);
+				}
+				return new Try<U>(e, null, false);
+			}
+		}
+	}
+
+	public void foreach(final Procedure1<? super T> f) {
+		if (isSuccess()) {
+			f.apply(get());
+		}
 	}
 
 }
