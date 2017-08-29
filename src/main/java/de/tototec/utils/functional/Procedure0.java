@@ -30,7 +30,7 @@ public interface Procedure0 {
 		}
 	}
 
-	public static class NoOp implements Procedure0 {
+	public static final class NoOp implements Procedure0 {
 
 		@Override
 		public void apply() {
