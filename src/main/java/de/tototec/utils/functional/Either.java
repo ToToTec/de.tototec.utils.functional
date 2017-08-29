@@ -29,7 +29,7 @@ public class Either<L, R> implements Serializable {
 		return new Either<L, R>(null, right, true);
 	}
 
-	private Either(final L left, final R right, final boolean isRight) {
+	/* package private */ Either(final L left, final R right, final boolean isRight) {
 		this.left = left;
 		this.right = right;
 		this.isRight = isRight;
