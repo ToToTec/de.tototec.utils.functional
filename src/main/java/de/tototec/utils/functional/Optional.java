@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Value class representing an optional value.
@@ -61,7 +62,7 @@ public class Optional<T> implements Iterable<T>, Serializable {
 		if (isDefined()) {
 			return optional;
 		} else {
-			throw new NullPointerException("Optional value not defined.");
+			throw new NoSuchElementException("Optional value not defined.");
 		}
 	}
 

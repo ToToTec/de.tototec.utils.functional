@@ -1,6 +1,7 @@
 package de.tototec.utils.functional;
 
 import java.io.Serializable;
+import java.util.NoSuchElementException;
 
 /**
  * Value class representing exactly one of two options, left or right.
@@ -43,7 +44,7 @@ public class Either<L, R> implements Serializable {
 		if (!isRight) {
 			return left;
 		} else {
-			throw new NullPointerException("Left value not defined.");
+			throw new NoSuchElementException("Left value not defined.");
 		}
 	}
 
@@ -59,7 +60,7 @@ public class Either<L, R> implements Serializable {
 		if (isRight) {
 			return right;
 		} else {
-			throw new NullPointerException("Right value not defined.");
+			throw new NoSuchElementException("Right value not defined.");
 		}
 	}
 
