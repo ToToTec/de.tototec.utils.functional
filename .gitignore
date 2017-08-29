@@ -1,2 +1,3 @@
-target
-.sbuild
+target/
+.sbuild/
+pom.xml
