@@ -458,7 +458,6 @@ public abstract class FList {
 	public static <T, C extends Comparable<C>> List<T> sortWith(final Iterable<T> source,
 			final F1<? super T, C> convert) {
 		return sort(source, new Comparator<T>() {
-			@Override
 			public int compare(final T o1, final T o2) {
 				return convert.apply(o1).compareTo(convert.apply(o2));
 			};
