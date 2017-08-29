@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * @param <T>
  *            The type of the optional value.
  */
-public class Optional<T> implements Iterable<T>, Serializable {
+public final class Optional<T> implements Iterable<T>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -63,18 +63,6 @@ public class Optional<T> implements Iterable<T>, Serializable {
 			return optional;
 		} else {
 			throw new NoSuchElementException("Optional value not defined.");
-		}
-	}
-
-	/**
-	 * @deprecated Use getOrElseF instead.
-	 */
-	@Deprecated
-	public T getOrElse(final F0<T> f) {
-		if (isDefined()) {
-			return optional;
-		} else {
-			return f.apply();
 		}
 	}
 
