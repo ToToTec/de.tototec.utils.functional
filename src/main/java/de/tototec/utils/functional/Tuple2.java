@@ -20,6 +20,24 @@ public class Tuple2<A, B> implements Serializable {
 		return new Tuple2<A, B>(a, b);
 	}
 
+	public static <A, B> F1<Tuple2<A, B>, A> extractA() {
+		return new F1<Tuple2<A, B>, A>() {
+			@Override
+			public A apply(final Tuple2<A, B> param) {
+				return param.a();
+			}
+		};
+	}
+
+	public static <A, B> F1<Tuple2<A, B>, B> extractB() {
+		return new F1<Tuple2<A, B>, B>() {
+			@Override
+			public B apply(final Tuple2<A, B> param) {
+				return param.b();
+			}
+		};
+	}
+
 	private final A a;
 	private final B b;
 
