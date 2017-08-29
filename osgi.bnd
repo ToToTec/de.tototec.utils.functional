@@ -1,0 +1,3 @@
+Implementation-Version: ${Bundle-Version}
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: ${bundle.namespace};version="${Bundle-Version}"
