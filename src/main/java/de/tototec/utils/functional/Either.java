@@ -56,6 +56,14 @@ public class Either<L, R> implements Serializable {
 		}
 	}
 
+	public Try<L> leftTry() {
+		if (!isRight) {
+			return Try.success(left);
+		} else {
+			return Try.failure(new NoSuchElementException("Either.left.value on Right"));
+		}
+	}
+
 	public R right() {
 		if (isRight) {
 			return right;
@@ -69,6 +77,14 @@ public class Either<L, R> implements Serializable {
 			return Optional.some(right);
 		} else {
 			return Optional.none();
+		}
+	}
+
+	public Try<R> rightTry() {
+		if (isRight) {
+			return Try.success(right);
+		} else {
+			return Try.failure(new NoSuchElementException("Either.right.value on Left"));
 		}
 	}
 
@@ -128,6 +144,10 @@ public class Either<L, R> implements Serializable {
 			}
 		}
 		return true;
+	}
+
+	public Either<R, L> swap() {
+		return new Either<R, L>(right, left, !isRight);
 	}
 
 }
