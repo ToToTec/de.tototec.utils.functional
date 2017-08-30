@@ -2,5 +2,7 @@ sudo: false
 language: java
 jdk:
 - oraclejdk8
+before_script:
+- mvn -N io.takari:maven:wrapper -Dmaven=3.5.0
 script:
-- mvn clean install source:jar javadoc:jar
+- ./mvnw clean install source:jar javadoc:jar
