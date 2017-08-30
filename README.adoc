@@ -13,7 +13,8 @@ image:https://travis-ci.org/ToToTec/de.tototec.utils.functional.svg?branch=maste
 image:https://img.shields.io/codacy/d6a2164c269d4a0a8245c12de43c5736.svg["Codacy Badge", link="https://www.codacy.com/p/3188/dashboard"]
 endif::[]
 
-This project consists of some useful helper classes and interfaces, which help to write more functional Java code.
+This project consists of some useful helper classes and interfaces, which help to write more functional Java code, even in pre-Java8 environments.
+
 
 == Introduction
 
@@ -27,8 +28,13 @@ The classes are:
 * link:{srcdir}de/tototec/utils/functional/Optional{javasuffix}[`Optional`] - An immutable class representing an optional value
 * link:{srcdir}de/tototec/utils/functional/Either{javasuffix}[`Either`] - An immutable class representing either one of two values
 * link:{srcdir}de/tototec/utils/functional/Tuple2{javasuffix}[`Tuple2`], link:{srcdir}de/tototec/utils/functional/Tuple3{javasuffix}[`Tuple3`], ... - Classes representing tuples with n args where n is given by the name
+* link:{srcdir}de/tototec/utils/functional/Try{javasuffix}[`Try`] - An experimental wrapper around computations, that may throw exceptions
 
 All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but hopefully less errorprone.
+
+There are a lot of more sophisticated functional libraries for Java8+ around, but they all cannot be used with older Java versions. Therefore, the aim of this library is to stay Java5+ compatible.
+
+Of course, programming with lambda expressions and annonymous classes in older Java versions isn't much fun. Please read the Java8 sections below, to learn how to code in Java8 source level but compile and convert Bytecode to older Java versions transparently.
 
 == Examples
 
@@ -69,7 +75,6 @@ List<String> namesUppercase_ = map(names, name -> name.toUppercase());
 
 // TODO: Examples
 
-(Example will come later)
 
 == Download
 
@@ -100,7 +105,7 @@ Writing functional code can be much more pleasant if Java 8 Lambda expressions c
 
 == Use of Java 8 Lambdas for earlier Java Runtimes
 
-Using the Java 8 lamdba expressions can grealty improve the functional experience.
+Using the Java 8 lamdba expressions can greatly improve the functional experience.
 If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the https://github.com/orfjackal/retrolambda[retrolambda tool].
 As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
 
@@ -115,7 +120,10 @@ To use Retrolambda in your Maven project, you need to add something like this (p
     <executions>
         <execution>
             <goals>
+                <!-- Convert the main classes -->
                 <goal>process-main</goal>
+                <!-- Convert the test classes -->
+                <!-- this is in most cases not needed though -->
                 <goal>process-test</goal>
             </goals>
         </execution>
@@ -153,18 +161,31 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
+=== 0.8.0-SNAPSHOT
+
+* Made some classes and methods final
+* Changed from Default JavaDoc processor to Asciidoclet processor
+* Migrated Maven build file (`pom.xml`) to Polyglot Scala Extension (`pom.scala`)
+* Added extractor methods `Tuple2.extractA` and `Tuple2.extractB`
+* Removed deprecated `Optional.getOrElse` override for `F0`
+* Changed thrown exceptions from `NullPointerException` to `NoSuchElementException`, e.g. in `Optional.get` or `Either.right`
+* Added `Tuple5`
+* Added experimental `Try`
+* Added `CheckedF0` and `CheckedF1` as throwing couterpart of `F0` and `F1`
+* Added `Either.leftTry` and `Either.rightTry`
+
 === 0.7.0 - 2016-06-01
 
-* Fixed faulty FList.distict method
+* Fixed faulty `FList.distict` method
 * Added no-op impls for Procedure interfaces
-* Improved / fixed signature of FList.flatten
-* Changed toString of Optional
-* Added FList.headOption
-* Added FList.tail
-* Added Optional.getOrElseF
-* Added Optional.orElse and Optional.orElseF
-* Added FList.filterNotNull
-* Added FList.concat
+* Improved / fixed signature of `FList.flatten`
+* Changed `toString` of `Optional`
+* Added `FList.headOption`
+* Added `FList.tail`
+* Added `Optional.getOrElseF`
+* Added `Optional.orElse` and `Optional.orElseF`
+* Added `FList.filterNotNull`
+* Added `FList.concat`
 
 === 0.6.0 - 2015-11-11
 
