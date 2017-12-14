@@ -1,7 +1,7 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
-:functionalversion: 0.7.0
+:functionalversion: 1.0.0
 ifdef::env-github,env-gitbucket[:outfilesuffix: .adoc]
 ifndef::env-asciidoclet[:srcdir: src/main/java/]
 ifdef::env-asciidoclet[:srcdir:]
@@ -24,6 +24,7 @@ The classes are:
 
 * link:{srcdir}de/tototec/utils/functional/FList{javasuffix}[`FList`] - contains static methods returning mostly `java.util.List` s and accepting `Iterable` s and arrays, like `map`, `flatMap`, `filter`, ...
 * link:{srcdir}de/tototec/utils/functional/F0{javasuffix}[`F0`], link:{srcdir}de/tototec/utils/functional/F1{javasuffix}[`F1`], link:{srcdir}de/tototec/utils/functional/F2{javasuffix}[`F2`], ... - Interfaces representing a function with n args where n is already in the name
+* link:{srcdir}de/tototec/utils/functional/CheckedF0{javasuffix}[`CheckedF0`], link:{srcdir}de/tototec/utils/functional/CheckedF1{javasuffix}[`CheckedF1`] - Interfaces representing a function with n args throing a `Throwable` where n is already in the name
 * link:{srcdir}de/tototec/utils/functional/Procedure0{javasuffix}[`Procedure0`], link:{srcdir}de/tototec/utils/functional/Procedure1{javasuffix}[`Procedure1`], link:{srcdir}de/tototec/utils/functional/Procedure2{javasuffix}[`Procedure2`] - Interfaces representing a procedure with n args where n is given by the name
 * link:{srcdir}de/tototec/utils/functional/Optional{javasuffix}[`Optional`] - An immutable class representing an optional value
 * link:{srcdir}de/tototec/utils/functional/Either{javasuffix}[`Either`] - An immutable class representing either one of two values
@@ -161,7 +162,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
-=== 0.8.0-SNAPSHOT
+=== 1.0.0 - 2017-12-14
 
 * Made some classes and methods final
 * Changed from Default JavaDoc processor to Asciidoclet processor

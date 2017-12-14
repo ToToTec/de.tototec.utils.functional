@@ -13,8 +13,8 @@ import java.util.Map;
 
 /**
  * Collection of static methods that mostly produce {@link List}s and accept
- * {@link Iterable}s or Java arrays. Method {@link FList#mkString(Iterable, String)}
- * produces a {@link String}.
+ * {@link Iterable}s or Java arrays. Method
+ * {@link FList#mkString(Iterable, String)} produces a {@link String}.
  *
  */
 public abstract class FList {
