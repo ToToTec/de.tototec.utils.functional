@@ -34,7 +34,7 @@ All those classes and interfaces can be used with Java 5 and above. Although by 
 
 There are a lot of more sophisticated functional libraries for Java8+ around, but they all cannot be used with older Java versions. Therefore, the aim of this library is to stay Java5+ compatible.
 
-Of course, programming with lambda expressions and annonymous classes in older Java versions isn't much fun. Please read the Java8 sections below, to learn how to code in Java8 source level but compile and convert Bytecode to older Java versions transparently.
+Of course, programming with lambda expressions and anonymous classes in older Java versions isn't much fun. Please read the Java8 sections below, to learn how to code in Java8 source level but compile and convert Bytecode to older Java versions transparently.
 
 == Examples
 
@@ -173,6 +173,8 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 * Added experimental `Try`
 * Added `CheckedF0` and `CheckedF1` as throwing couterpart of `F0` and `F1`
 * Added `Either.leftTry` and `Either.rightTry`
+* Added `FList.drop`
+* Added `FList.take`
 
 === 0.7.0 - 2016-06-01
 

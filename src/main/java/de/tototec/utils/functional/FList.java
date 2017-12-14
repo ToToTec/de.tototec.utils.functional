@@ -19,8 +19,6 @@ import java.util.Map;
  */
 public abstract class FList {
 
-	// TODO: concat
-
 	public static <T, A extends T, B extends T> List<T> concat(final A[] first, final B[] second) {
 		return concat(Arrays.asList(first), Arrays.asList(second));
 	}
@@ -108,6 +106,39 @@ public abstract class FList {
 
 	public static <T> List<T> distinct(final T[] source) {
 		return distinct(Arrays.asList(source));
+	}
+
+	/**
+	 * Drop the first `count` elements.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 */
+	public static <T> List<T> drop(final Iterable<T> source, int count) {
+		final List<T> result = new LinkedList<T>();
+		if (source instanceof Collection<?> && ((Collection<?>) source).size() < count) {
+			return result;
+		}
+		boolean drop = true;
+		for (final T t : source) {
+			if (drop && count <= 0) {
+				drop = false;
+			}
+			--count;
+			if (!drop) {
+				result.add(t);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Drop the first `count` elements.
+	 * 
+	 * @since 1.0.0
+	 */
+	public static <T> List<T> drop(final T[] source, final int count) {
+		return drop(Arrays.asList(source), count);
 	}
 
 	public static <T> List<T> dropWhile(final Iterable<T> source, final F1<? super T, Boolean> accept) {
@@ -483,6 +514,34 @@ public abstract class FList {
 
 	public static <T> List<T> tail(final T[] source) {
 		return tail(Arrays.asList(source));
+	}
+
+	/**
+	 * Take the first `count` elements.
+	 * 
+	 * @since 1.0.0
+	 */
+	public static <T> List<T> take(final Iterable<T> source, final int count) {
+		final List<T> result = new LinkedList<T>();
+		int i = 0;
+		for (final T t : source) {
+			if (i < count) {
+				result.add(t);
+				++i;
+			} else {
+				break;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Take the first `count` elements.
+	 * 
+	 * @since 1.0.0
+	 */
+	public static <T> List<T> take(final T[] source, final int count) {
+		return take(Arrays.asList(source), count);
 	}
 
 	public static <T> List<T> takeWhile(final Iterable<T> source, final F1<? super T, Boolean> accept) {

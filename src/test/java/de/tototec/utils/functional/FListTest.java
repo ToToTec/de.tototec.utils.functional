@@ -6,6 +6,7 @@ import static de.tobiasroeser.lambdatest.Expect.expectTrue;
 import static de.tototec.utils.functional.FList.foldLeft;
 import static de.tototec.utils.functional.FList.mkString;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.tobiasroeser.lambdatest.testng.FreeSpec;
@@ -90,6 +91,67 @@ public class FListTest extends FreeSpec {
 		testDistinct(Arrays.asList("1", "2", "3"), "1", "2", "3");
 		testDistinct(Arrays.asList("1", "2"), "1", "2", "1");
 		testDistinct(Arrays.asList("1", "2"), "1", "2", "1");
+
+		section("drop", () -> {
+			test("drops nothing if count is negative", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.drop(list, -1);
+				expectEquals(result, list);
+			});
+			test("drops nothing if count is 0", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.drop(list, 0);
+				expectEquals(result, list);
+			});
+			test("drops first if count is 1", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.drop(list, 1);
+				expectEquals(result, Arrays.asList(2, 3));
+			});
+			test("drops first two if count is 2", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.drop(list, 2);
+				expectEquals(result, Arrays.asList(3));
+			});
+			test("drops all if count is greater than size", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.drop(list, 5);
+				expectEquals(result, Collections.emptyList());
+			});
+		});
+
+		section("take", () -> {
+			test("takes nothing if count is negative", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.take(list, -1);
+				expectEquals(result, Collections.emptyList());
+			});
+			test("takes zero if count is 0", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.take(list, 0);
+				expectEquals(result, Collections.emptyList());
+			});
+			test("takes first one if count is 1", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.take(list, 1);
+				expectEquals(result, Arrays.asList(1));
+			});
+			test("takes first two if count is 2", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.take(list, 2);
+				expectEquals(result, Arrays.asList(1, 2));
+			});
+			test("takes first three if count is 3", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.take(list, 3);
+				expectEquals(result, Arrays.asList(1, 2, 3));
+			});
+			test("takes all if count is greater than size", () -> {
+				final List<Integer> list = Arrays.asList(1, 2, 3);
+				final List<Integer> result = FList.take(list, 5);
+				expectEquals(result, list);
+			});
+		});
 
 	}
 

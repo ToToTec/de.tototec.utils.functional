@@ -34,7 +34,7 @@ Model(
   ),
   dependencies = Seq(
     "org.testng" % "testng" % "6.9.10" % "test",
-    "de.tototec" % "de.tobiasroeser.lambdatest" % "0.2.3" % "test"
+    "de.tototec" % "de.tobiasroeser.lambdatest" % "0.3.0" % "test"
   ),
   properties = Map(
     "bundle.namespace" -> projectName,
