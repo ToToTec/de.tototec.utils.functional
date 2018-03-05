@@ -166,6 +166,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 * Added `Flist.append` and `Flist.prepend`
 * Added `FList.toList`
+* Added `Optional.of` as a preferred alternative to `Optional.lift`
 
 === 1.0.0 - 2017-12-14
 

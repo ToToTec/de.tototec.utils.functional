@@ -28,8 +28,23 @@ public final class Optional<T> implements Iterable<T>, Serializable {
 
 	/**
 	 * Create an empty {@link Optional}.
+	 * 
+	 * Use {@link #of(S)} instead.
+	 * 
+	 * @see #of(S)
 	 */
 	public static <S> Optional<S> lift(final S someOrNull) {
+		if (someOrNull == null) {
+			return new Optional<S>();
+		} else {
+			return new Optional<S>(someOrNull);
+		}
+	}
+
+	/**
+	 * Create an empty {@link Optional}.
+	 */
+	public static <S> Optional<S> of(final S someOrNull) {
 		if (someOrNull == null) {
 			return new Optional<S>();
 		} else {
