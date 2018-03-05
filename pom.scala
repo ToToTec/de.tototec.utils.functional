@@ -9,6 +9,12 @@ object Deps {
   val asciiDoclet = "org.asciidoctor" % "asciidoclet" % "1.5.4"
 }
 
+object Plugins {
+  val animalSniffer = "org.codehaus.mojo" % "animal-sniffer-maven-plugin" % "1.15"
+  val bundle = "org.apache.felix" % "maven-bundle-plugin" % "3.2.0"
+  val javadoc = "org.apache.maven.plugins" % "maven-javadoc-plugin" % "2.10.3"
+}
+
 Model(
   gav = "de.tototec" % projectName % projectVersion,
   packaging = "bundle",
@@ -48,7 +54,7 @@ Model(
     plugins = Seq(
       // Check that no Java6+ API is used
       Plugin(
-        "org.codehaus.mojo" % "animal-sniffer-maven-plugin" % "1.15",
+        Plugins.animalSniffer,
         executions = Seq(
           Execution(
             id = "signature-check",
@@ -66,7 +72,7 @@ Model(
       ),
       // Package OSGi-compatible JAR and check version against previous release version
       Plugin(
-        "org.apache.felix" % "maven-bundle-plugin" % "3.2.0",
+        Plugins.bundle,
         extensions = true,
         executions = Seq(
           Execution(
@@ -89,7 +95,7 @@ Model(
       ),
       // Use Asciidoclet processor instead of standard Javadoc
       Plugin(
-        "org.apache.maven.plugins" % "maven-javadoc-plugin" % "2.10.3",
+        Plugins.javadoc,
         configuration = Config(
           source = "${maven.compiler.source}",
           doclet = "org.asciidoctor.Asciidoclet",
