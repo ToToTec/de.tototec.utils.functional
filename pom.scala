@@ -2,7 +2,7 @@ import org.sonatype.maven.polyglot.scala.model._
 import scala.collection.immutable.Seq
 
 val projectName = "de.tototec.utils.functional"
-val projectVersion = "1.0.0"
+val projectVersion = "1.0.1-SNAPSHOT"
 
 object Deps {
   val bndLib = "biz.aQute.bnd" % "biz.aQute.bndlib" % "3.2.0"
