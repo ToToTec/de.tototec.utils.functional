@@ -23,9 +23,13 @@ This project consists of some useful helper classes and interfaces, which help t
 The classes are:
 
 * link:{srcdir}de/tototec/utils/functional/FList{javasuffix}[`FList`] - contains static methods returning mostly `java.util.List` s and accepting `Iterable` s and arrays, like `map`, `flatMap`, `filter`, ...
-* link:{srcdir}de/tototec/utils/functional/F0{javasuffix}[`F0`], link:{srcdir}de/tototec/utils/functional/F1{javasuffix}[`F1`], link:{srcdir}de/tototec/utils/functional/F2{javasuffix}[`F2`], ... - Interfaces representing a function with n args where n is already in the name
-* link:{srcdir}de/tototec/utils/functional/CheckedF0{javasuffix}[`CheckedF0`], link:{srcdir}de/tototec/utils/functional/CheckedF1{javasuffix}[`CheckedF1`] - Interfaces representing a function with n args throing a `Throwable` where n is already in the name
-* link:{srcdir}de/tototec/utils/functional/Procedure0{javasuffix}[`Procedure0`], link:{srcdir}de/tototec/utils/functional/Procedure1{javasuffix}[`Procedure1`], link:{srcdir}de/tototec/utils/functional/Procedure2{javasuffix}[`Procedure2`] - Interfaces representing a procedure with n args where n is given by the name
+* link:{srcdir}de/tototec/utils/functional/F0{javasuffix}[`F0`], link:{srcdir}de/tototec/utils/functional/F1{javasuffix}[`F1`], link:{srcdir}de/tototec/utils/functional/F2{javasuffix}[`F2`],
+link:{srcdir}de/tototec/utils/functional/F3{javasuffix}[`F3`],
+link:{srcdir}de/tototec/utils/functional/F4{javasuffix}[`F4`] - Interfaces representing a function with n args where n is given by the interface name suffix
+* link:{srcdir}de/tototec/utils/functional/CheckedF0{javasuffix}[`CheckedF0`], link:{srcdir}de/tototec/utils/functional/CheckedF1{javasuffix}[`CheckedF1`]  - Interfaces representing a function with n args throwing an Exception where n is given by the interface name suffix
+* link:{srcdir}de/tototec/utils/functional/Procedure0{javasuffix}[`Procedure0`], link:{srcdir}de/tototec/utils/functional/Procedure1{javasuffix}[`Procedure1`], link:{srcdir}de/tototec/utils/functional/Procedure2{javasuffix}[`Procedure2`],
+link:{srcdir}de/tototec/utils/functional/Procedure3{javasuffix}[`Procedure3`],
+link:{srcdir}de/tototec/utils/functional/Procedure4{javasuffix}[`Procedure4`] - Interfaces representing a procedure with n args where n is given by the interface name suffix
 * link:{srcdir}de/tototec/utils/functional/Optional{javasuffix}[`Optional`] - An immutable class representing an optional value
 * link:{srcdir}de/tototec/utils/functional/Either{javasuffix}[`Either`] - An immutable class representing either one of two values
 * link:{srcdir}de/tototec/utils/functional/Tuple2{javasuffix}[`Tuple2`], link:{srcdir}de/tototec/utils/functional/Tuple3{javasuffix}[`Tuple3`], ... - Classes representing tuples with n args where n is given by the name
@@ -39,6 +43,26 @@ Of course, programming with lambda expressions and anonymous classes in older Ja
 
 == Examples
 
+.Example for Java 8
+[source,java]
+----
+import java.util.*;
+import de.tototec.utils.functional.*;
+import static de.tototec.utils.functional.FList.*;
+
+List<String> names = Arrays.asList("Alice", "Bob", "Carlie", "Dylan");
+// --> [Alice, Bob, Carlie, Dylan]
+
+// Filtering
+List<String> namesWithE_ = filter(names, name -> name.contains("e"));
+// --> [Alice, Carlie]
+
+// Apply a function to all elements
+List<String> namesUppercase_ = map(names, name -> name.toUppercase());
+// --> [ALICE, BOB, CARLIE, DYLAN]
+----
+
+.Example for Java 7 and before
 [source,java]
 ----
 import java.util.*;
@@ -56,9 +80,6 @@ List<String> namesWithE = filter(names, new F1<String, Boolean>() {
 });
 // --> [Alice, Carlie]
 
-// Java 8
-List<String> namesWithE_ = filter(names, name -> name.contains("e"));
-
 // Apply a function to all elements
 List<String> namesUppercase = map(names, new F1<String, String>() {
   public String apply(String name) {
@@ -66,23 +87,17 @@ List<String> namesUppercase = map(names, new F1<String, String>() {
   }
 });
 // --> [ALICE, BOB, CARLIE, DYLAN]
-
-// Java 8
-List<String> namesUppercase_ = map(names, name -> name.toUppercase());
-// --> [ALICE, BOB, CARLIE, DYLAN]
-
-
 ----
 
-// TODO: Examples
+
+// TODO: more Examples
 
 
 == Download
 
 Functional Utils is available from http://search.maven.org/#search|gav|1|g%3A%22de.tototec%22%20AND%20a%3A%22de.tototec.utils.functional%22[Maven central repository].
 
-Maven users can use the following dependency declaration:
-
+.Maven
 [source,xml,subs="attributes,verbatim"]
 ----
 <dependency>
@@ -92,8 +107,14 @@ Maven users can use the following dependency declaration:
 </dependency>
 ----
 
-http://sbuild.org[SBuild] users can use the following dependency:
+.Polyglot Maven Scala / SBT
+[source,scala,subs="attributes"]
+----
+"de.tototec" % "de.tototec.utils.functional" % "{functionalversion}"
+----
 
+
+.http://sbuild.org[SBuild]
 [source,scala,subs="attributes"]
 ----
 "mvn:de.tototec:de.tototec.utils.functional:{functionalversion}"
