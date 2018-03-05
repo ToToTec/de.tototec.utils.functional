@@ -1,3 +1,4 @@
 target/
 .sbuild/
 pom.xml
+/target-ide/
