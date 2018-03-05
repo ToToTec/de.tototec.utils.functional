@@ -20,6 +20,19 @@ import java.util.Map;
  */
 public abstract class FList {
 
+	public static <T, A extends T> List<T> append(final A[] elements, final T append) {
+		return append(Arrays.asList(elements), append);
+	}
+
+	public static <T, A extends T> List<T> append(final Iterable<A> elements, final T append) {
+		final LinkedList<T> result = new LinkedList<T>();
+		for (final A a : elements) {
+			result.add(a);
+		}
+		result.add(append);
+		return result;
+	}
+
 	public static <T, A extends T, B extends T> List<T> concat(final A[] first, final B[] second) {
 		return concat(Arrays.asList(first), Arrays.asList(second));
 	}
@@ -445,6 +458,19 @@ public abstract class FList {
 			}
 		}
 		return Tuple2.of(left, right);
+	}
+
+	public static <T, A extends T> List<T> prepend(final T head, final A[] tail) {
+		return prepend(head, Arrays.asList(tail));
+	}
+
+	public static <T, A extends T> List<T> prepend(final T head, final Iterable<A> tail) {
+		final LinkedList<T> result = new LinkedList<T>();
+		result.add(head);
+		for (final A a : tail) {
+			result.add(a);
+		}
+		return result;
 	}
 
 	public static <T> Tuple2<List<T>, List<T>> partition(final T[] source, final F1<? super T, Boolean> predicate) {
