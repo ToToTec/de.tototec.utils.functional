@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -570,6 +571,30 @@ public abstract class FList {
 
 	public static <K, V> LinkedHashMap<K, V> toHashMap(final Tuple2<K, V>[] source) {
 		return toHashMap(Arrays.asList(source));
+	}
+
+	public static <T> List<T> toList(final Enumeration<T> enumeration) {
+		final List<T> result = new LinkedList<T>();
+		while (enumeration.hasMoreElements()) {
+			result.add(enumeration.nextElement());
+		}
+		return result;
+	}
+
+	public static <T> List<T> toList(final Iterable<T> iterable) {
+		if (iterable instanceof List) {
+			return (List<T>) iterable;
+		} else {
+			final List<T> result = new LinkedList<T>();
+			for (final T t : iterable) {
+				result.add(t);
+			}
+			return result;
+		}
+	}
+
+	public static <T> List<T> toList(final T... elements) {
+		return Arrays.asList(elements);
 	}
 
 	// TODO: union

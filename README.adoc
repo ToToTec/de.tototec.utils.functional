@@ -162,6 +162,10 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
+=== {master}
+
+* Added `FList.toList`
+
 === 1.0.0 - 2017-12-14
 
 * Made some classes and methods final
