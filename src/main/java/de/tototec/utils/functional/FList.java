@@ -599,6 +599,30 @@ public abstract class FList {
 		return toHashMap(Arrays.asList(source));
 	}
 
+	public static <K, V> LinkedHashMap<K, V> toHashMap(final K key1, final V value1) {
+		final LinkedHashMap<K, V> result = new LinkedHashMap<K, V>();
+		result.put(key1, value1);
+		return result;
+	}
+
+	public static <K, V> LinkedHashMap<K, V> toHashMap(final K key1, final V value1, final K key2, final V value2) {
+		final LinkedHashMap<K, V> result = new LinkedHashMap<K, V>();
+		result.put(key1, value1);
+		result.put(key2, value2);
+		return result;
+	}
+
+	public static <K, V> LinkedHashMap<K, V> toHashMap(
+			final K key1, final V value1, 
+			final K key2, final V value2,
+			final K key3, final V value3) {
+		final LinkedHashMap<K, V> result = new LinkedHashMap<K, V>();
+		result.put(key1, value1);
+		result.put(key2, value2);
+		result.put(key3, value3);
+		return result;
+	}
+
 	public static <T> List<T> toList(final Enumeration<T> enumeration) {
 		final List<T> result = new LinkedList<T>();
 		while (enumeration.hasMoreElements()) {

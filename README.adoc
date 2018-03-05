@@ -185,10 +185,11 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 === {master}
 
-* Added `Flist.append` and `Flist.prepend`
+* Added `FList.append` and `FList.prepend`
 * Added `FList.toList`
 * Added `Optional.of` as a preferred alternative to `Optional.lift`
 * Added `Procedure4`
+* Added more `FList.toHashMap` variants
 
 === 1.0.0 - 2017-12-14
 
