@@ -7,6 +7,10 @@ val projectVersion = "1.1.0-SNAPSHOT"
 object Deps {
   val bndLib = "biz.aQute.bnd" % "biz.aQute.bndlib" % "3.2.0"
   val asciiDoclet = "org.asciidoctor" % "asciidoclet" % "1.5.4"
+  val testng = "org.testng" % "testng" % "6.9.10"
+  val lambdatest = "de.tototec" % "de.tobiasroeser.lambdatest" % "0.4.0"
+  val slf4j = "org.slf4j" % "slf4j-api" % "1.7.25"
+  val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.2.3"
 }
 
 object Plugins {
@@ -39,8 +43,10 @@ Model(
     url = "https://github.com/ToToTec/de.tototec.utils.functional"
   ),
   dependencies = Seq(
-    "org.testng" % "testng" % "6.9.10" % "test",
-    "de.tototec" % "de.tobiasroeser.lambdatest" % "0.3.0" % "test"
+    Deps.testng % "test",
+    Deps.lambdatest % "test",
+    Deps.slf4j % "test",
+    Deps.logbackClassic % "test"
   ),
   properties = Map(
     "bundle.namespace" -> projectName,
