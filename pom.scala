@@ -1,8 +1,8 @@
 import org.sonatype.maven.polyglot.scala.model._
 import scala.collection.immutable.Seq
 
-val projectName = "de.tototec.utils.functional"
-val projectVersion = "1.1.0-SNAPSHOT"
+val gav = "de.tototec" % "de.tototec.utils.functional" % "1.1.0-SNAPSHOT"
+val url = "https://github.com/ToToTec/de.tototec.utils.functional"
 
 object Deps {
   val bndLib = "biz.aQute.bnd" % "biz.aQute.bndlib" % "3.2.0"
@@ -20,12 +20,12 @@ object Plugins {
 }
 
 Model(
-  gav = "de.tototec" % projectName % projectVersion,
+  gav = gav,
   packaging = "bundle",
   modelVersion = "4.0.0",
   name = "Functional Utils",
   description = "Functional Utility Classes for working with Java 5+",
-  url = "https://github.com/ToToTec/de.tototec.utils.functional",
+  url = url,
   developers = Seq(
     Developer(
       email = "le.petit.fou@web.de",
@@ -40,7 +40,7 @@ Model(
     )
   ),
   scm = Scm(
-    url = "https://github.com/ToToTec/de.tototec.utils.functional"
+    url = url
   ),
   dependencies = Seq(
     Deps.testng % "test",
@@ -49,7 +49,7 @@ Model(
     Deps.logbackClassic % "test"
   ),
   properties = Map(
-    "bundle.namespace" -> projectName,
+    "bundle.namespace" -> gav.artifactId,
     "project.build.sourceEncoding" -> "UTF-8",
     "maven.compiler.source" -> "1.5",
     "maven.compiler.target" -> "1.5",
@@ -112,10 +112,10 @@ Model(
           ),
           overview = "README.adoc",
           additionalparam = s"""--base-dir "$${project.basedir}"
-            | --attribute "name=${projectName}"
-						| --attribute "version=${projectVersion}"
-						| --attribute "functionalversion=${projectVersion}"
-						| --attribute "title-link=https://github.com/ToToTec/de.tototec.utils.functional[${projectName} ${projectVersion}]"
+            | --attribute "name=${gav.artifactId}"
+						| --attribute "version=${gav.version.get}"
+						| --attribute "functionalversion=${gav.version.get}"
+						| --attribute "title-link=${url}[${gav.artifactId} ${gav.version.get}]"
 						| --attribute "env-asciidoclet=true"""".stripMargin
         )
       )
