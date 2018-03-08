@@ -2,6 +2,8 @@ package de.tototec.utils.functional;
 
 import java.io.Serializable;
 
+import de.tototec.utils.functional.F1;
+
 /**
  * Value class representing a 2-tuple.
  *
@@ -39,7 +41,7 @@ public class Tuple2<A, B> implements Serializable {
 	private final A a;
 	private final B b;
 
-	private Tuple2(final A a, final B b) {
+	protected Tuple2(final A a, final B b) {
 		this.a = a;
 		this.b = b;
 	}
@@ -62,32 +64,39 @@ public class Tuple2<A, B> implements Serializable {
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
+	public boolean equals(final Object other) {
+		if (this == other) {
 			return true;
 		}
-		if (obj == null) {
+
+		if (!(other instanceof Tuple2)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+
+		final Tuple2<?, ?> that = (Tuple2<?, ?>) other;
+		if (!that.canEqual(this)) {
 			return false;
 		}
-		final Tuple2<?, ?> other = (Tuple2<?, ?>) obj;
-		if (a() == null) {
-			if (other.a() != null) {
+
+		if (this.a() == null) {
+			if (that.a() != null) {
 				return false;
 			}
-		} else if (!a().equals(other.a())) {
+		} else if (!this.a().equals(that.a())) {
 			return false;
 		}
-		if (b() == null) {
-			if (other.b() != null) {
+		if (this.b() == null) {
+			if (that.b() != null) {
 				return false;
 			}
-		} else if (!b().equals(other.b())) {
+		} else if (!this.b().equals(that.b())) {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean canEqual(final Object other) {
+		return other instanceof Tuple2;
 	}
 
 	@Override

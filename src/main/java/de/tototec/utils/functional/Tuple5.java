@@ -40,7 +40,7 @@ public class Tuple5<A, B, C, D, E> implements Serializable {
 	private final D d;
 	private final E e;
 
-	private Tuple5(final A a, final B b, final C c, final D d, final E e) {
+	protected Tuple5(final A a, final B b, final C c, final D d, final E e) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
@@ -81,53 +81,60 @@ public class Tuple5<A, B, C, D, E> implements Serializable {
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
+	public boolean equals(final Object other) {
+		if (this == other) {
 			return true;
 		}
-		if (obj == null) {
+
+		if (!(other instanceof Tuple5)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+
+		final Tuple5<?, ?, ?, ?, ?> that = (Tuple5<?, ?, ?, ?, ?>) other;
+		if (!that.canEqual(this)) {
 			return false;
 		}
-		final Tuple5<?, ?, ?, ?, ?> other = (Tuple5<?, ?, ?, ?, ?>) obj;
-		if (a() == null) {
-			if (other.a() != null) {
+
+		if (this.a() == null) {
+			if (that.a() != null) {
 				return false;
 			}
-		} else if (!a().equals(other.a())) {
+		} else if (!this.a().equals(that.a())) {
 			return false;
 		}
-		if (b() == null) {
-			if (other.b() != null) {
+		if (this.b() == null) {
+			if (that.b() != null) {
 				return false;
 			}
-		} else if (!b().equals(other.b())) {
+		} else if (!this.b().equals(that.b())) {
 			return false;
 		}
-		if (c() == null) {
-			if (other.c() != null) {
+		if (this.c() == null) {
+			if (that.c() != null) {
 				return false;
 			}
-		} else if (!c().equals(other.c())) {
+		} else if (!this.c().equals(that.c())) {
 			return false;
 		}
-		if (d() == null) {
-			if (other.d() != null) {
+		if (this.d() == null) {
+			if (that.d() != null) {
 				return false;
 			}
-		} else if (!d().equals(other.d())) {
+		} else if (!this.d().equals(that.d())) {
 			return false;
 		}
-		if (e() == null) {
-			if (other.e() != null) {
+		if (this.e() == null) {
+			if (that.e() != null) {
 				return false;
 			}
-		} else if (!e().equals(other.e())) {
+		} else if (!this.e().equals(that.e())) {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean canEqual(final Object other) {
+		return other instanceof Tuple5;
 	}
 
 	@Override
