@@ -1,7 +1,7 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
-:functionalversion: 1.0.0
+:functionalversion: 2.0.0
 ifdef::env-github,env-gitbucket[:outfilesuffix: .adoc]
 ifndef::env-asciidoclet[:srcdir: src/main/java/]
 ifdef::env-asciidoclet[:srcdir:]
