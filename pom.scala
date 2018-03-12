@@ -139,6 +139,12 @@ Model(
             goals = Seq("strip-jar")
           )
         )
+      ),
+      Plugin(
+        Plugins.deploy,
+        configuration = Config(
+          skip = "true"
+        )
       )
     )
   ),
