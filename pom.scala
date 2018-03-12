@@ -1,25 +1,36 @@
 import org.sonatype.maven.polyglot.scala.model._
 import scala.collection.immutable.Seq
 
-val gav = "de.tototec" % "de.tototec.utils.functional" % "1.1.0-SNAPSHOT"
+val gav = "de.tototec" % "de.tototec.utils.functional" % "2.0.0-SNAPSHOT"
 val url = "https://github.com/ToToTec/de.tototec.utils.functional"
 
 object Deps {
-  val bndLib = "biz.aQute.bnd" % "biz.aQute.bndlib" % "3.2.0"
   val asciiDoclet = "org.asciidoctor" % "asciidoclet" % "1.5.4"
-  val testng = "org.testng" % "testng" % "6.9.10"
+  val antContrib = "ant-contrib" % "ant-contrib" % "1.0b3"
+  val bndLib = "biz.aQute.bnd" % "biz.aQute.bndlib" % "3.2.0"
   val lambdatest = "de.tototec" % "de.tobiasroeser.lambdatest" % "0.4.0"
-  val slf4j = "org.slf4j" % "slf4j-api" % "1.7.25"
   val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.2.3"
+  val slf4j = "org.slf4j" % "slf4j-api" % "1.7.25"
+  val testng = "org.testng" % "testng" % "6.9.10"
 }
 
 object Plugins {
   val animalSniffer = "org.codehaus.mojo" % "animal-sniffer-maven-plugin" % "1.15"
+  val antrun = "org.apache.maven.plugins" % "maven-antrun-plugin" % "1.8"
   val bundle = "org.apache.felix" % "maven-bundle-plugin" % "3.2.0"
-  val javadoc = "org.apache.maven.plugins" % "maven-javadoc-plugin" % "2.10.3"
+  val clean = "org.apache.maven.plugins" % "maven-clean-plugin" % "3.0.0"
+  val deploy = "org.apache.maven.plugins" % "maven-deploy-plugin" % "2.8.2"
+  val gpg = "org.apache.maven.plugins" % "maven-gpg-plugin" % "1.6"
+  val jar = "org.apache.maven.plugins" % "maven-jar-plugin" % "2.5"
+  val javadoc = "org.apache.maven.plugins" % "maven-javadoc-plugin" % "3.0.0"
+  val nexusStaging = "org.sonatype.plugins" % "nexus-staging-maven-plugin" % "1.6.7"
   val polyglotTranslate = "io.takari.polyglot" % "polyglot-translate-plugin" % "0.3.0"
   val reproducibleBuild = "io.github.zlika" % "reproducible-build-maven-plugin" % "0.5.1"
+  val source = "org.apache.maven.plugins" % "maven-source-plugin" % "3.0.1"
+  val surefire = "org.apache.maven.plugins" % "maven-surefire-plugin" % "2.20.1"
 }
+
+//#include mvn-release.scala
 
 Model(
   gav = gav,
@@ -129,6 +140,11 @@ Model(
           )
         )
       )
+    )
+  ),
+  profiles = Seq(
+    ReleaseProfile(
+      autoReleaseAfterClose = true
     )
   )
 )
