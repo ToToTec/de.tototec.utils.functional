@@ -2,3 +2,4 @@ target/
 .sbuild/
 pom.xml
 /target-ide/
+/gh-pages/
