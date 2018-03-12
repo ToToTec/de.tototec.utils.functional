@@ -192,6 +192,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 * Added more `FList.toHashMap` variants
 * Deprecated `Optional.lift` in favour of `Optional.of`
 * Changed signature of `Optional.orElseF`
+* Made classes `Either` and `Try` final
 
 === 1.0.0 - 2017-12-14
 

@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  * @param <R>
  *            The type of the right option.
  */
-public class Either<L, R> implements Serializable {
+public final class Either<L, R> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

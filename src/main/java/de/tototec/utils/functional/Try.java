@@ -3,7 +3,7 @@ package de.tototec.utils.functional;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class Try<T> implements Serializable {
+public final class Try<T> implements Serializable {
 
 	// BEGIN OF STATIC PART
 
