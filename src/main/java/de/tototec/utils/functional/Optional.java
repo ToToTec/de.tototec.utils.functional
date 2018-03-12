@@ -170,6 +170,10 @@ public final class Optional<T> implements Iterable<T>, Serializable {
 		}
 	}
 
+	public Optional<T> filter(final F1<T, Boolean> predicate) {
+		return (isDefined() && predicate.apply(get())) ? this : Optional.<T>none();
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + (isEmpty() ? ".NONE" : "(" + optional + ")");
