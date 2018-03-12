@@ -177,17 +177,17 @@ public class Try<T> implements Serializable {
 		}
 	}
 
-	public <U extends T> Try<U> orElseF(final CheckedF0<Try<U>> f) {
+	public Try<T> orElseF(final CheckedF0<Try<T>> f) {
 		if (isSuccess) {
-			return (Try<U>) this;
+			return this;
 		} else {
 			try {
 				return f.apply();
 			} catch (final Throwable e) {
 				if (isFatal(e)) {
-					Util.<RuntimeException, U> sneakyThrow(e);
+					Util.<RuntimeException, T> sneakyThrow(e);
 				}
-				return new Try<U>(e, null, false);
+				return new Try<T>(e, null, false);
 			}
 		}
 	}

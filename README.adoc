@@ -191,6 +191,7 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 * Added `Procedure4`
 * Added more `FList.toHashMap` variants
 * Deprecated `Optional.lift` in favour of `Optional.of`
+* Changed signature of `Optional.orElseF`
 
 === 1.0.0 - 2017-12-14
 
