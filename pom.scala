@@ -17,6 +17,7 @@ object Plugins {
   val animalSniffer = "org.codehaus.mojo" % "animal-sniffer-maven-plugin" % "1.15"
   val bundle = "org.apache.felix" % "maven-bundle-plugin" % "3.2.0"
   val javadoc = "org.apache.maven.plugins" % "maven-javadoc-plugin" % "2.10.3"
+  val polyglotTranslate = "io.takari.polyglot" % "polyglot-translate-plugin" % "0.3.0"
   val reproducibleBuild = "io.github.zlika" % "reproducible-build-maven-plugin" % "0.5.1"
 }
 
