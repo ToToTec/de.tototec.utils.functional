@@ -32,6 +32,8 @@ public final class Optional<T> implements Iterable<T>, Serializable {
 	 * Use {@link #of(S)} instead.
 	 * 
 	 * @see #of(S)
+	 * 
+	 * @deprecated Use {@link #getOrElseF(F0)} instead.
 	 */
 	public static <S> Optional<S> lift(final S someOrNull) {
 		if (someOrNull == null) {
@@ -171,7 +173,7 @@ public final class Optional<T> implements Iterable<T>, Serializable {
 	}
 
 	public Optional<T> filter(final F1<T, Boolean> predicate) {
-		return (isDefined() && predicate.apply(get())) ? this : Optional.<T>none();
+		return (isDefined() && predicate.apply(get())) ? this : Optional.<T> none();
 	}
 
 	@Override
