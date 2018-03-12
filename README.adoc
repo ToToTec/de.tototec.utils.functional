@@ -183,7 +183,9 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
-=== {master}
+//=== {master}
+
+=== 2.0.0 - 2018-03-17
 
 * Added `FList.append` and `FList.prepend`
 * Added `FList.toList`
