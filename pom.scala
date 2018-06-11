@@ -25,7 +25,7 @@ object Plugins {
   val javadoc = "org.apache.maven.plugins" % "maven-javadoc-plugin" % "3.0.0"
   val nexusStaging = "org.sonatype.plugins" % "nexus-staging-maven-plugin" % "1.6.7"
   val polyglotTranslate = "io.takari.polyglot" % "polyglot-translate-plugin" % "0.3.0"
-  val reproducibleBuild = "io.github.zlika" % "reproducible-build-maven-plugin" % "0.5.1"
+  val reproducibleBuild = "io.github.zlika" % "reproducible-build-maven-plugin" % "0.7"
   val source = "org.apache.maven.plugins" % "maven-source-plugin" % "3.0.1"
   val surefire = "org.apache.maven.plugins" % "maven-surefire-plugin" % "2.20.1"
 }
