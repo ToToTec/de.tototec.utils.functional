@@ -17,17 +17,14 @@ public final class Try<T> implements Serializable {
 		if (isFatal(failure)) {
 			Util.<RuntimeException, T> sneakyThrow(failure);
 		}
-		return new Try<T>(failure, null, true);
+		return new Try<T>(failure, null, false);
 	}
 
 	public static <T> Try<T> of(final CheckedF0<T> provider) {
 		try {
-			return new Try<T>(null, provider.apply(), true);
+			return success(provider.apply());
 		} catch (final Throwable e) {
-			if (isFatal(e)) {
-				Util.<RuntimeException, T> sneakyThrow(e);
-			}
-			return new Try<T>(e, null, false);
+			return failure(e);
 		}
 	}
 
@@ -104,11 +101,11 @@ public final class Try<T> implements Serializable {
 	}
 
 	public boolean isSuccess() {
-		return !isSuccess;
+		return isSuccess;
 	}
 
 	public boolean isFailure() {
-		return isSuccess;
+		return !isSuccess;
 	}
 
 	@Override
