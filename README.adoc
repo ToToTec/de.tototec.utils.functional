@@ -1,7 +1,7 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
-:functionalversion: 2.0.0
+:functionalversion: 2.0.1
 ifdef::env-github,env-gitbucket[:outfilesuffix: .adoc]
 ifndef::env-asciidoclet[:srcdir: src/main/java/]
 ifdef::env-asciidoclet[:srcdir:]
@@ -186,7 +186,9 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 
 == Changelog
 
-//=== {master}
+=== 2.0.1 - 2019-04-11
+
+* Fixed a logic error in `Try.failure`
 
 === 2.0.0 - 2018-03-17
 
