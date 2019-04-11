@@ -122,7 +122,7 @@ Functional Utils is available from http://search.maven.org/#search|gav|1|g%3A%22
 
 == Documentation
 
-* https://ToToTec.github.io/de.tototec.utils.functional/apidocs/{functionalversion}[Javadoc]
+* https://ToToTec.github.io/de.tototec.utils.functional/apidocs/{functionalversion}/[Javadoc]
 
 == Use with Java 8 Lambdas
 
