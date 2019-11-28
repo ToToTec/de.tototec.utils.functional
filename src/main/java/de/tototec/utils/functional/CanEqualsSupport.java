@@ -3,36 +3,37 @@ package de.tototec.utils.functional;
 import java.lang.reflect.Method;
 
 /**
- * Convenience support to easy writing correct <code>equals</code> and <code>hashCode</code> methods.
- * <p/>
- * Example
- * <pre><code>
- *   	class MyDataClass {
- * 			private static final CanEqualsSupport<MyDataClass> eq = new CanEqualsSupport<>(MyDataClass.class,
- * 		    	c -> c.a, c -> c.b
- * 		  	);
+ * Convenience support to easy writing correct `equals` and `hashCode` methods.
  *
- * 	    private final String a;
- * 	    private final Long b;
+ * .Example
+ * [source,java]
+ * ----
+ * class MyDataClass {
+ *   private static final CanEqualsSupport<MyDataClass> eq = new CanEqualsSupport<>(MyDataClass.class,
+ *     c -> c.a, c -> c.b
+ *   );
  *
- * 	    public MyDataClass(String a, Long b) {
- * 	      this.a = a;
- * 	      this.b = b;
- *      }
+ *   private final String a;
+ *   private final Long b;
  *
- *      @Override public boolean equals(Object other) {
- * 				return eq._equals(this, other);
- *      }
- *
- *      @Override public int hashCode() {
- * 				return eq._hashCode(this);
- *      }
- *
- * 			public boolean canEqual(Object other) {
- * 				return eq._canEqual(other);
- *      }
+ *   public MyDataClass(String a, Long b) {
+ * 	   this.a = a;
+ * 	   this.b = b;
  *   }
- * </code></pre>
+ *
+ *   @Override public boolean equals(Object other) {
+ * 	   return eq._equals(this, other);
+ *   }
+ *
+ *   @Override public int hashCode() {
+ * 	   return eq._hashCode(this);
+ *   }
+ *
+ * 	 public boolean canEqual(Object other) {
+ * 	   return eq._canEqual(other);
+ *   }
+ * }
+ * ----
  *
  * @param <T> The type of the class to which the equals and hashCode methods belongs.
  */
