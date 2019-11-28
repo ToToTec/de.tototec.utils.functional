@@ -1,7 +1,7 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
-:functionalversion: 2.0.1
+:functionalversion: 2.1.0
 ifdef::env-github,env-gitbucket[:outfilesuffix: .adoc]
 ifndef::env-asciidoclet[:srcdir: src/main/java/]
 ifdef::env-asciidoclet[:srcdir:]
@@ -34,6 +34,7 @@ link:{srcdir}de/tototec/utils/functional/Procedure4{javasuffix}[`Procedure4`] - 
 * link:{srcdir}de/tototec/utils/functional/Either{javasuffix}[`Either`] - An immutable class representing either one of two values
 * link:{srcdir}de/tototec/utils/functional/Tuple2{javasuffix}[`Tuple2`], link:{srcdir}de/tototec/utils/functional/Tuple3{javasuffix}[`Tuple3`], ... - Classes representing tuples with n args where n is given by the name
 * link:{srcdir}de/tototec/utils/functional/Try{javasuffix}[`Try`] - An experimental wrapper around computations, that may throw exceptions
+* link:{srcdir}de/tototec/utils/functional/CanEqualsSupport{javasuffix}[`CanEqualsSupport`] - An helper class to produce proper `equals` and `hashCode` methods.
 
 All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but hopefully less errorprone.
 
@@ -185,6 +186,10 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 ----
 
 == Changelog
+
+=== 2.1.0 - 2019-11-28
+
+* Added `CanEqualsSupport` to create proper `equals` and `hashCode` methods.
 
 === 2.0.1 - 2019-04-11
 

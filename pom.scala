@@ -1,7 +1,7 @@
 import org.sonatype.maven.polyglot.scala.model._
 import scala.collection.immutable.Seq
 
-val gav = "de.tototec" % "de.tototec.utils.functional" % "2.0.2-SNAPSHOT"
+val gav = "de.tototec" % "de.tototec.utils.functional" % "2.1.0"
 val url = "https://github.com/ToToTec/de.tototec.utils.functional"
 
 object Deps {
