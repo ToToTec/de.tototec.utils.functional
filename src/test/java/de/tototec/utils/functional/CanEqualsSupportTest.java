@@ -8,23 +8,6 @@ public class CanEqualsSupportTest extends FreeSpec {
 
 	public CanEqualsSupportTest() {
 
-		class NoFields {
-			private final CanEqualsSupport<NoFields> eq = new CanEqualsSupport<>(NoFields.class);
-
-			@Override
-			public boolean equals(Object other) {
-				return eq._equals(this, other);
-			}
-
-			@Override
-			public int hashCode() {
-				return eq._hashCode(this);
-			}
-
-			public boolean canEqual(Object other) {
-				return eq._canEqual(other);
-			}
-		}
 
 		test("Immutable class with no fields", () -> {
 			final NoFields a = new NoFields();
@@ -32,8 +15,6 @@ public class CanEqualsSupportTest extends FreeSpec {
 			checkEquals(Tuple2.of(a, a), Tuple2.of(a, b));
 		});
 
-		class NoFieldsDerived extends NoFields {
-		}
 
 		test("Immutable class with no fields is equal to it's derivation", () -> {
 			final NoFields a = new NoFields();
@@ -42,61 +23,17 @@ public class CanEqualsSupportTest extends FreeSpec {
 		});
 
 
-		class NoFieldsWithoutCanEqual {
-			private final CanEqualsSupport<NoFieldsWithoutCanEqual> eq = new CanEqualsSupport<>(NoFieldsWithoutCanEqual.class);
-
-			@Override
-			public boolean equals(Object other) {
-				return eq._equals(this, other);
-			}
-
-			@Override
-			public int hashCode() {
-				return eq._hashCode(this);
-			}
-		}
-
 		test("Immutable class with no fields and no canEqual method", () -> {
 			final NoFieldsWithoutCanEqual a = new NoFieldsWithoutCanEqual();
 			final NoFieldsWithoutCanEqual b = new NoFieldsWithoutCanEqual();
 			checkEquals(Tuple2.of(a, a), Tuple2.of(a, b));
 		});
 
-		class NoFieldsWithoutCanEqualDerived {
-		}
-
 		test("Immutable class with no fields and no canEqual method is not equal to it's derivation", () -> {
 			final NoFieldsWithoutCanEqual a = new NoFieldsWithoutCanEqual();
 			final NoFieldsWithoutCanEqualDerived a1 = new NoFieldsWithoutCanEqualDerived();
 			checkNonEquals(Tuple2.of(a, a1));
 		});
-
-		class SingleFields {
-			private final CanEqualsSupport<SingleFields> eq = new CanEqualsSupport<>(SingleFields.class, SingleFields::getA);
-			private final String a;
-
-			public SingleFields(String a) {
-				this.a = a;
-			}
-
-			public String getA() {
-				return a;
-			}
-
-			@Override
-			public boolean equals(Object other) {
-				return eq._equals(this, other);
-			}
-
-			@Override
-			public int hashCode() {
-				return eq._hashCode(this);
-			}
-
-			public boolean canEqual(Object other) {
-				return eq._canEqual(other);
-			}
-		}
 
 
 		test("Immutable class with single fields", () -> {
@@ -113,38 +50,6 @@ public class CanEqualsSupportTest extends FreeSpec {
 			);
 		});
 
-		class DoubleFields {
-			private final CanEqualsSupport<DoubleFields> eq = new CanEqualsSupport<>(DoubleFields.class, DoubleFields::getA, DoubleFields::getB);
-			private final String a;
-			private final long b;
-
-			public DoubleFields(String a, long b) {
-				this.a = a;
-				this.b = b;
-			}
-
-			public String getA() {
-				return a;
-			}
-
-			public long getB() {
-				return b;
-			}
-
-			@Override
-			public boolean equals(Object other) {
-				return eq._equals(this, other);
-			}
-
-			@Override
-			public int hashCode() {
-				return eq._hashCode(this);
-			}
-
-			public boolean canEqual(Object other) {
-				return eq._canEqual(other);
-			}
-		}
 
 		test("Immutable class with two fields", () -> {
 			final DoubleFields a = new DoubleFields("Hello", 1L);
@@ -172,30 +77,6 @@ public class CanEqualsSupportTest extends FreeSpec {
 			);
 		});
 
-		class DoubleFieldsFieldAccess {
-			private final CanEqualsSupport<DoubleFieldsFieldAccess> eq = new CanEqualsSupport<>(DoubleFieldsFieldAccess.class, c -> c.a, c -> c.b);
-			private final String a;
-			private final long b;
-
-			public DoubleFieldsFieldAccess(String a, long b) {
-				this.a = a;
-				this.b = b;
-			}
-
-			@Override
-			public boolean equals(Object other) {
-				return eq._equals(this, other);
-			}
-
-			@Override
-			public int hashCode() {
-				return eq._hashCode(this);
-			}
-
-			public boolean canEqual(Object other) {
-				return eq._canEqual(other);
-			}
-		}
 
 		test("Immutable class with two fields (field access)", () -> {
 			final DoubleFieldsFieldAccess a = new DoubleFieldsFieldAccess("Hello", 1L);
@@ -225,88 +106,6 @@ public class CanEqualsSupportTest extends FreeSpec {
 			);
 		});
 
-		class Point {
-
-			private final int x;
-			private final int y;
-
-			public Point(int x, int y) {
-				this.x = x;
-				this.y = y;
-			}
-
-			public int getX() {
-				return x;
-			}
-
-			public int getY() {
-				return y;
-			}
-
-			private final CanEqualsSupport<Point> eq = new CanEqualsSupport<>(Point.class, c -> c.getX(), c -> c.getY());
-
-			@Override
-			public boolean equals(Object other) {
-//				boolean result = false;
-//				if (other instanceof Point) {
-//					Point that = (Point) other;
-//					result = (
-//						that.canEqual(this) &&
-//						this.getX() == that.getX() && this.getY() == that.getY());
-//				}
-//				return result;
-				return eq._equals(this, other);
-			}
-
-			@Override
-			public int hashCode() {
-//				return (41 * (41 + getX()) + getY());
-				return eq._hashCode(this);
-			}
-
-			public boolean canEqual(Object other) {
-//				return (other instanceof Point);
-				return eq._canEqual(other);
-			}
-		}
-
-		class ColoredPoint extends Point { // No longer violates symmetry requirement
-
-			private final String color;
-
-			public ColoredPoint(int x, int y, String color) {
-				super(x, y);
-				this.color = color;
-			}
-
-			private final CanEqualsSupport<ColoredPoint> eq = new CanEqualsSupport<>(ColoredPoint.class, c -> c.color);
-
-			@Override
-			public boolean equals(Object other) {
-//				boolean result = false;
-//				if (other instanceof ColoredPoint) {
-//					ColoredPoint that = (ColoredPoint) other;
-//					result = (
-//						that.canEqual(this) &&
-//							this.color.equals(that.color) && super.equals(that));
-//				}
-//				return result;
-				return eq._equals(this, other) && super.equals(other);
-			}
-
-			@Override
-			public int hashCode() {
-//				return (41 * super.hashCode() + color.hashCode());
-				return eq._hashCode(this, super.hashCode());
-			}
-
-			@Override
-			public boolean canEqual(Object other) {
-//				return (other instanceof ColoredPoint);
-				return eq._canEqual(other);
-			}
-
-		}
 
 		test("Derived data class has proper equals contract", () -> {
 			Point p1 = new Point(1, 1);
@@ -343,6 +142,216 @@ public class CanEqualsSupportTest extends FreeSpec {
 			expectFalse(tuple.a().equals(tuple.b()), "Expected [" + tuple.a() + "] not equals [" + tuple.b() + "]");
 			expectFalse(tuple.b().equals(tuple.a()), "Expected [" + tuple.b() + "] not equals [" + tuple.a() + "]");
 		}
+	}
+
+	public static class NoFields {
+		private static final CanEqualsSupport<NoFields> eq = new CanEqualsSupport<>(NoFields.class);
+
+		@Override
+		public boolean equals(Object other) {
+			return eq._equals(this, other);
+		}
+
+		@Override
+		public int hashCode() {
+			return eq._hashCode(this);
+		}
+
+		public boolean canEqual(Object other) {
+			return eq._canEqual(other);
+		}
+	}
+
+	public static class NoFieldsDerived extends NoFields {
+	}
+
+	public static class NoFieldsWithoutCanEqual {
+		private static final CanEqualsSupport<NoFieldsWithoutCanEqual> eq = new CanEqualsSupport<>(NoFieldsWithoutCanEqual.class);
+
+		@Override
+		public boolean equals(Object other) {
+			return eq._equals(this, other);
+		}
+
+		@Override
+		public int hashCode() {
+			return eq._hashCode(this);
+		}
+	}
+
+
+	public static class NoFieldsWithoutCanEqualDerived {
+	}
+
+	public static class SingleFields {
+		private static final CanEqualsSupport<SingleFields> eq = new CanEqualsSupport<>(SingleFields.class, SingleFields::getA);
+
+		private final String a;
+
+		public SingleFields(String a) {
+			this.a = a;
+		}
+
+		public String getA() {
+			return a;
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			return eq._equals(this, other);
+		}
+
+		@Override
+		public int hashCode() {
+			return eq._hashCode(this);
+		}
+
+		public boolean canEqual(Object other) {
+			return eq._canEqual(other);
+		}
+	}
+
+	public static class DoubleFields {
+		private static final CanEqualsSupport<DoubleFields> eq = new CanEqualsSupport<>(DoubleFields.class, DoubleFields::getA, DoubleFields::getB);
+
+		private final String a;
+		private final long b;
+
+		public DoubleFields(String a, long b) {
+			this.a = a;
+			this.b = b;
+		}
+
+		public String getA() {
+			return a;
+		}
+
+		public long getB() {
+			return b;
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			return eq._equals(this, other);
+		}
+
+		@Override
+		public int hashCode() {
+			return eq._hashCode(this);
+		}
+
+		public boolean canEqual(Object other) {
+			return eq._canEqual(other);
+		}
+	}
+
+	public static class DoubleFieldsFieldAccess {
+		private static final CanEqualsSupport<DoubleFieldsFieldAccess> eq = new CanEqualsSupport<>(DoubleFieldsFieldAccess.class, c -> c.a, c -> c.b);
+
+		private final String a;
+		private final long b;
+
+		public DoubleFieldsFieldAccess(String a, long b) {
+			this.a = a;
+			this.b = b;
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			return eq._equals(this, other);
+		}
+
+		@Override
+		public int hashCode() {
+			return eq._hashCode(this);
+		}
+
+		public boolean canEqual(Object other) {
+			return eq._canEqual(other);
+		}
+	}
+
+	public static class Point {
+
+		private final int x;
+		private final int y;
+
+		public Point(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		private static final CanEqualsSupport<Point> eq = new CanEqualsSupport<>(Point.class, c -> c.getX(), c -> c.getY());
+
+		@Override
+		public boolean equals(Object other) {
+			//				boolean result = false;
+			//				if (other instanceof Point) {
+			//					Point that = (Point) other;
+			//					result = (
+			//						that.canEqual(this) &&
+			//						this.getX() == that.getX() && this.getY() == that.getY());
+			//				}
+			//				return result;
+			return eq._equals(this, other);
+		}
+
+		@Override
+		public int hashCode() {
+//				return (41 * (41 + getX()) + getY());
+			return eq._hashCode(this);
+		}
+
+		public boolean canEqual(Object other) {
+			//				return (other instanceof Point);
+			return eq._canEqual(other);
+		}
+	}
+
+	public static class ColoredPoint extends Point { // No longer violates symmetry requirement
+
+		private final String color;
+
+		public ColoredPoint(int x, int y, String color) {
+			super(x, y);
+			this.color = color;
+		}
+
+		private static final CanEqualsSupport<ColoredPoint> eq = new CanEqualsSupport<>(ColoredPoint.class, c -> c.color);
+
+		@Override
+		public boolean equals(Object other) {
+			//				boolean result = false;
+			//				if (other instanceof ColoredPoint) {
+			//					ColoredPoint that = (ColoredPoint) other;
+			//					result = (
+			//						that.canEqual(this) &&
+			//							this.color.equals(that.color) && super.equals(that));
+			//				}
+			//				return result;
+			return eq._equals(this, other) && super.equals(other);
+		}
+
+		@Override
+		public int hashCode() {
+			//				return (41 * super.hashCode() + color.hashCode());
+			return eq._hashCode(this, super.hashCode());
+		}
+
+		@Override
+		public boolean canEqual(Object other) {
+			//				return (other instanceof ColoredPoint);
+			return eq._canEqual(other);
+		}
+
 	}
 
 }
