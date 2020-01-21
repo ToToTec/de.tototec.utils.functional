@@ -42,6 +42,7 @@ public class CanEqualsSupport<T> {
 	private final Class<T> thisType;
 	private final F1<T, Object>[] fields;
 
+	@SafeVarargs
 	public CanEqualsSupport(Class<T> thisType, F1<T, Object>... fields) {
 		this.thisType = thisType;
 		this.fields = fields == null ? new F1[0] : fields;
