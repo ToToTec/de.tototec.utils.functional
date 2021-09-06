@@ -1,7 +1,7 @@
 = Functional Utils
 :toc:
 :toc-placement: preamble
-:functionalversion: 2.1.0
+:functionalversion: 2.1.1
 ifdef::env-github,env-gitbucket[:outfilesuffix: .adoc]
 ifndef::env-asciidoclet[:srcdir: src/main/java/]
 ifdef::env-asciidoclet[:srcdir:]
@@ -11,6 +11,7 @@ ifdef::env-asciidoclet[:javasuffix: .html]
 ifdef::env-github[]
 image:https://travis-ci.org/ToToTec/de.tototec.utils.functional.svg?branch=master["Build Status", link="https://travis-ci.org/ToToTec/de.tototec.utils.functional"]
 image:https://img.shields.io/codacy/d6a2164c269d4a0a8245c12de43c5736.svg["Codacy Badge", link="https://www.codacy.com/p/3188/dashboard"]
+image:https://javadoc.io/badge2/de.tototec/de.tototec.utils.functional/javadoc.svg["JavaDoc", link="https://javadoc.io/doc/de.tototec/de.tototec.utils.functional"]
 endif::[]
 
 This project consists of some useful helper classes and interfaces, which help to write more functional Java code, even in pre-Java8 environments.
@@ -186,6 +187,10 @@ This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plug
 ----
 
 == Changelog
+
+=== 2.1.1 - 2021-09-06
+
+* Added `@SafeVarargs` annotation to `CanEqualsSupport`
 
 === 2.1.0 - 2019-11-28
 
