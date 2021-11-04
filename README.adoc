@@ -35,7 +35,7 @@ link:{srcdir}de/tototec/utils/functional/Procedure4{javasuffix}[`Procedure4`] - 
 * link:{srcdir}de/tototec/utils/functional/Either{javasuffix}[`Either`] - An immutable class representing either one of two values
 * link:{srcdir}de/tototec/utils/functional/Tuple2{javasuffix}[`Tuple2`], link:{srcdir}de/tototec/utils/functional/Tuple3{javasuffix}[`Tuple3`], ... - Classes representing tuples with n args where n is given by the name
 * link:{srcdir}de/tototec/utils/functional/Try{javasuffix}[`Try`] - An experimental wrapper around computations, that may throw exceptions
-* link:{srcdir}de/tototec/utils/functional/CanEqualsSupport{javasuffix}[`CanEqualsSupport`] - An helper class to produce proper `equals` and `hashCode` methods.
+* link:{srcdir}de/tototec/utils/functional/CanEqualsSupport{javasuffix}[`CanEqualsSupport`] - An helper class to produce proper `equals` and `hashCode`  as well as `canEqual` methods.
 
 All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but hopefully less errorprone.
 
@@ -124,7 +124,7 @@ Functional Utils is available from http://search.maven.org/#search|gav|1|g%3A%22
 
 == Documentation
 
-* https://ToToTec.github.io/de.tototec.utils.functional/apidocs/{functionalversion}/index.html[Javadoc]
+* https://javadoc.io/doc/de.tototec/de.tototec.utils.functional[Javadoc]
 
 == Use with Java 8 Lambdas
 
