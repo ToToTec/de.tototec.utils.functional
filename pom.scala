@@ -1,14 +1,14 @@
 import org.sonatype.maven.polyglot.scala.model._
 import scala.collection.immutable.Seq
 
-val gav = "de.tototec" % "de.tototec.utils.functional" % "2.1.2-SNAPSHOT"
+val gav = "de.tototec" % "de.tototec.utils.functional" % "2.2.0"
 val url = "https://github.com/ToToTec/de.tototec.utils.functional"
 
 object Deps {
   val asciiDoclet = "org.asciidoctor" % "asciidoclet" % "1.5.4"
   val antContrib = "ant-contrib" % "ant-contrib" % "1.0b3"
   val bndLib = "biz.aQute.bnd" % "biz.aQute.bndlib" % "3.2.0"
-  val lambdatest = "de.tototec" % "de.tobiasroeser.lambdatest" % "0.5.0"
+  val lambdatest = "de.tototec" % "de.tobiasroeser.lambdatest" % "0.7.1"
   val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.2.3"
   val slf4j = "org.slf4j" % "slf4j-api" % "1.7.25"
   val testng = "org.testng" % "testng" % "6.14.3"
