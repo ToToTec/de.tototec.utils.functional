@@ -149,7 +149,7 @@ public final class Optional<T> implements Iterable<T>, Serializable {
 
 	@SuppressWarnings("unchecked")
 	public List<T> toList() {
-		return isDefined() ? Arrays.<T> asList(optional) : Collections.<T> emptyList();
+		return isDefined() ? Collections.singletonList(optional) : Collections.<T> emptyList();
 	}
 
 	public Iterator<T> iterator() {
