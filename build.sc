@@ -23,6 +23,9 @@ object root extends RootModule with MavenModule with PublishSettings {
   override def javacOptions = Seq(
     "-source", "1.8", "-target", "8", "-deprecation", "-encoding", "UTF-8"
   )
+  override def javadocOptions: T[Seq[String]] = Seq(
+    "-Xdoclint:none"
+  )
   object test extends MavenModuleTests with TestModule.TestNg {
     override def ivyDeps = Agg(
       ivy"de.tototec:de.tobiasroeser.lambdatest:0.7.1",
