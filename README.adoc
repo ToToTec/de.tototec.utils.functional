@@ -37,9 +37,9 @@ link:{srcdir}de/tototec/utils/functional/Procedure4{javasuffix}[`Procedure4`] - 
 * link:{srcdir}de/tototec/utils/functional/Try{javasuffix}[`Try`] - An experimental wrapper around computations, that may throw exceptions
 * link:{srcdir}de/tototec/utils/functional/CanEqualsSupport{javasuffix}[`CanEqualsSupport`] - An helper class to produce proper `equals` and `hashCode`  as well as `canEqual` methods.
 
-All those classes and interfaces can be used with Java 5 and above. Although by their use, your code will not get more compact, but hopefully less errorprone.
+All those classes and interfaces can be used with Java 8 and above. Releases up until `2.3.0` also supported Java 5+. Although by their use, your code will not get more compact, but hopefully less errorprone.
 
-There are a lot of more sophisticated functional libraries for Java8+ around, but they all cannot be used with older Java versions. Therefore, the aim of this library is to stay Java5+ compatible.
+There are a lot of more sophisticated functional libraries for Java8+ around, but they all cannot be used with older Java versions. Therefore, the historical aim of this library was to stay Java5+ compatible.
 
 Of course, programming with lambda expressions and anonymous classes in older Java versions isn't much fun. Please read the Java8 sections below, to learn how to code in Java8 source level but compile and convert Bytecode to older Java versions transparently.
 
@@ -64,7 +64,7 @@ List<String> namesUppercase_ = map(names, name -> name.toUppercase());
 // --> [ALICE, BOB, CARLIE, DYLAN]
 ----
 
-.Example for Java 7 and before
+.Example for Java 7 and before (only work until release `2.3.0`)
 [source,java]
 ----
 import java.util.*;
@@ -116,10 +116,10 @@ Functional Utils is available from http://search.maven.org/#search|gav|1|g%3A%22
 ----
 
 
-.http://sbuild.org[SBuild]
+.https://mill-build.com/[Mill]
 [source,scala,subs="attributes"]
 ----
-"mvn:de.tototec:de.tototec.utils.functional:{functionalversion}"
+ivy"de.tototec:de.tototec.utils.functional:{functionalversion}"
 ----
 
 == Documentation
@@ -132,61 +132,14 @@ Writing functional code can be much more pleasant if Java 8 Lambda expressions c
 
 == Use of Java 8 Lambdas for earlier Java Runtimes
 
-Using the Java 8 lamdba expressions can greatly improve the functional experience.
-If you need to target an older Java Runtime, down to Java 5, you can still compile your code with a Java 8 compiler and afterwards postprocess the classfiles with the https://github.com/orfjackal/retrolambda[retrolambda tool].
-As long as you only use the Lambda syntax but no other new API from Java 8, your code will also run in Java 7 and before.
-
-To use Retrolambda in your Maven project, you need to add something like this (please refer also to the Retrolambda website for more up to date information):
-
-[source,xml]
-----
-<plugin>
-    <groupId>net.orfjackal.retrolambda</groupId>
-    <artifactId>retrolambda-maven-plugin</artifactId>
-    <version>1.6.1</version>
-    <executions>
-        <execution>
-            <goals>
-                <!-- Convert the main classes -->
-                <goal>process-main</goal>
-                <!-- Convert the test classes -->
-                <!-- this is in most cases not needed though -->
-                <goal>process-test</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin>
-----
-
-Addionally, you should take extra measure to ensure no Java8 API slips through.
-This can be achieved with the http://mojo.codehaus.org/animal-sniffer-maven-plugin/[animal-sniffer Maven plugin]:
-
-[source,xml]
-----
-<plugin>
-	<groupId>org.codehaus.mojo</groupId>
-	<artifactId>animal-sniffer-maven-plugin</artifactId>
-	<version>1.11</version>
-	<executions>
-		<execution>
-			<id>signature-check</id>
-			<phase>test</phase>
-			<goals>
-				<goal>check</goal>
-			</goals>
-		</execution>
-	</executions>
-	<configuration>
-		<signature>
-			<groupId>org.codehaus.mojo.signature</groupId>
-			<artifactId>java17</artifactId>
-			<version>1.0</version>
-		</signature>
-	</configuration>
-</plugin>
-----
+_Please refer to an older version of this Readme (e.g. `2.3.0`) for this information._
 
 == Changelog
+
+=== `main`
+
+* Build with Mill, drop Maven support
+* Drop support for Java versions before Java 8
 
 === 2.3.0 - 2021-11-23
 
