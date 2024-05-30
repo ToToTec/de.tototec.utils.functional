@@ -53,7 +53,7 @@ jobs:
         with:
           java-version: 8
           distribution: temurin
-      - run: ./millw -i -k mima.mimaReportBinaryIssues
+      - run: ./millw -i -k __.mimaReportBinaryIssues
 
   publish:
     if: github.repository == 'ToToTec/de.tototec.utils.functional'  && github.ref == 'refs/heads/main' && github.event_name == 'push'

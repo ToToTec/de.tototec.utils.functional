@@ -32,7 +32,7 @@ object root extends RootModule
     with PublishSettings
     with OsgiBundleModule
     with MimaSettings {
-  
+
   override def artifactName: T[String] = "de.tototec.utils.functional"
   override def javacOptions = Seq(
     "-source", "1.8", "-target", "8", "-deprecation", "-encoding", "UTF-8"
