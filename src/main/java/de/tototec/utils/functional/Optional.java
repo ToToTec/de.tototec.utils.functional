@@ -63,6 +63,14 @@ public final class Optional<T> implements Iterable<T>, Serializable {
         return opt.isPresent() ? some(opt.get()) : none();
     }
 
+    public static <S> Optional<S> when(boolean cond, S data) {
+        return cond ? Optional.some(data) : Optional.none();
+    }
+
+    public static <S> Optional<S> whenF(boolean cond, F0<S> data) {
+        return cond ? Optional.some(data.apply()) : Optional.none();
+    }
+
     private final boolean isNone;
     private final T optional;
 
