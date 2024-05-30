@@ -1,4 +1,5 @@
 import com.github.lolgab.mill.mima.Mima
+import de.tobiasroeser.mill.jacoco.JacocoTestModule
 import de.tobiasroeser.mill.osgi.{OsgiBundleModule, OsgiHeaders}
 import de.tobiasroeser.mill.vcs.version.VcsVersion
 import mill._
@@ -22,7 +23,7 @@ trait PublishSettings extends PublishModule {
 }
 
 trait MimaSettings extends Mima {
-  def scalaVersion = "2.13.14"
+  override def scalaVersion = "2.13.14"
   override def artifactId: T[String] = T{ artifactName()}
   override def mimaPreviousVersions = T{ Seq("2.3.0", "2.2.0", "2.1.0", "2.0.0") }
 }
@@ -44,7 +45,7 @@ object root extends RootModule
   `Export-Package` = Seq("de.tototec.utils.functional")
   )
 
-  object test extends MavenModuleTests with TestModule.TestNg {
+  object test extends MavenModuleTests with TestModule.TestNg with JacocoTestModule {
     override def ivyDeps = Agg(
       ivy"de.tototec:de.tobiasroeser.lambdatest:0.7.1",
       ivy"ch.qos.logback:logback-classic:1.2.3",
