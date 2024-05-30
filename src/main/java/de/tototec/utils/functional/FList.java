@@ -403,6 +403,10 @@ public abstract class FList {
 		return mkString(source, null, separator, null);
 	}
 
+	public static String mkString(final java.util.Optional<?> source, final String separator) {
+		return mkString(Optional.fromJava(source), null, separator, null);
+	}
+
 	public static String mkString(final Object[] source, final String separator) {
 		return mkString(Arrays.asList(source), separator);
 	}

@@ -96,6 +96,10 @@ public final class Try<T> implements Serializable {
 		}
 	}
 
+	public java.util.Optional<T> toJavaOption() {
+		return toOption().toJava();
+	}
+
 	public Either<Throwable, T> toEither() {
 		return new Either<Throwable, T>(failure, value, isSuccess);
 	}
