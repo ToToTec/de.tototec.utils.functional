@@ -9,7 +9,7 @@ object root extends MillBuildRootModule {
     // generate OSGi metadata
     ivy"de.tototec::de.tobiasroeser.mill.osgi::0.5.0-11-bf16ad",
     // check bincompat against previous releases
-    ivy"com.github.lolgab::mill-mima::0.1.0",
+    ivy"com.github.lolgab::mill-mima::0.1.1",
     // generate test coverage data
     ivy"de.tototec::de.tobiasroeser.mill.jacoco::0.0.4"
   )

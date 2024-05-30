@@ -24,9 +24,6 @@ trait PublishSettings extends PublishModule {
 
 trait MimaSettings extends Mima {
   override def mimaPreviousVersions = T{ Seq("2.3.0", "2.2.0", "2.1.0", "2.0.0") }
-  // TODO: Cleanup below, once https://github.com/lolgab/mill-mima/pull/155 is released
-  override def scalaVersion = "2.13.14"
-  override def artifactId: T[String] = T{ artifactName()}
 }
 
 object root extends RootModule
