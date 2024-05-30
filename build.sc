@@ -1,16 +1,17 @@
-import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.4.0`
-import $ivy.`de.tototec::de.tobiasroeser.mill.osgi::0.5.0-11-bf16ad`
-
+import com.github.lolgab.mill.mima.Mima
 import de.tobiasroeser.mill.osgi.{OsgiBundleModule, OsgiHeaders}
 import de.tobiasroeser.mill.vcs.version.VcsVersion
 import mill._
 import mill.scalalib._
 import mill.scalalib.publish.{Developer, License, PomSettings, VersionControl}
 
+// Enable the Mill meta-build under `mill-build`
+import $meta.`mill-build`
+
 trait PublishSettings extends PublishModule {
   override def pomSettings: T[PomSettings] = PomSettings(
     description = "Functional Utility Classes for working with Java 8+",
-    organization = "de.tototec.utils.functional",
+    organization = "de.tototec",
     url = "https://github.com/ToToTec/de.tototec.utils.functional",
     licenses = Seq(License.`Apache-2.0`),
     versionControl = VersionControl.github("ToToTec", "de.tototec.utils.functional"),
@@ -40,4 +41,16 @@ object root extends RootModule with MavenModule with PublishSettings with OsgiBu
       ivy"com.lihaoyi:mill-contrib-testng:${mill.main.BuildInfo.millVersion}"
     )
   }
+
+  object mima extends Mima with PublishSettings {
+    def scalaVersion = "2.13.14"
+    override def mimaCurrentArtifact = T {
+      root.jar()
+    }
+    override def mimaPreviousArtifacts = T{
+      Agg("2.3.0", "2.2.0", "2.1.0", "2.0.0")
+        .map(v => ivy"${root.publishSelfDependency().group}:${root.publishSelfDependency().id}:${v}")
+    }
+  }
 }
+
