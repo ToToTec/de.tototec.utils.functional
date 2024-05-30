@@ -21,7 +21,18 @@ trait PublishSettings extends PublishModule {
   override def publishVersion: T[String] = VcsVersion.vcsState().format()
 }
 
-object root extends RootModule with MavenModule with PublishSettings with OsgiBundleModule {
+trait MimaSettings extends Mima {
+  def scalaVersion = "2.13.14"
+  override def artifactId: T[String] = T{ artifactName()}
+  override def mimaPreviousVersions = T{ Seq("2.3.0", "2.2.0", "2.1.0", "2.0.0") }
+}
+
+object root extends RootModule
+    with MavenModule
+    with PublishSettings
+    with OsgiBundleModule
+    with MimaSettings {
+  
   override def artifactName: T[String] = "de.tototec.utils.functional"
   override def javacOptions = Seq(
     "-source", "1.8", "-target", "8", "-deprecation", "-encoding", "UTF-8"
@@ -42,15 +53,5 @@ object root extends RootModule with MavenModule with PublishSettings with OsgiBu
     )
   }
 
-  object mima extends Mima with PublishSettings {
-    def scalaVersion = "2.13.14"
-    override def mimaCurrentArtifact = T {
-      root.jar()
-    }
-    override def mimaPreviousArtifacts = T{
-      Agg("2.3.0", "2.2.0", "2.1.0", "2.0.0")
-        .map(v => ivy"${root.publishSelfDependency().group}:${root.publishSelfDependency().id}:${v}")
-    }
-  }
 }
 
